@@ -1,0 +1,701 @@
+body {
+font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+h6{
+	margin-top:0px;
+}
+.top-menu{
+position: fixed;
+top: 0;
+left: 0;
+z-index: 999;
+
+}
+
+*:focus {
+    outline: none;
+}
+:link:focus, :visited:focus { outline: none; }
+
+.sec-box{
+	
+	padding:10px 10px 27px 10px;
+}
+.demo-box{
+	border-bottom:1px solid #cccccc;
+	padding:10px;
+}
+
+/*tab slider code css start*/
+.swiper-container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.swiper-slide {
+	background-size: cover;
+	/* overflow: scroll; */
+	background-position: center;
+
+}
+.swiper-slide h6 {
+	color: #fff;
+	text-align: center;
+}
+.gallery-top {
+	height: 100%;
+	width: 100%;
+}
+.gallery-thumbs {
+	/*height: 10%;*/
+	box-sizing: border-box;
+	
+	cursor: pointer;
+}
+.gallery-thumbs .swiper-slide {
+	width:100%;
+	height:auto;
+	opacity: 0.9;
+	background-color:#00aeef;
+	color:#fff;
+	padding:6px;
+}
+.gallery-thumbs .swiper-slide-active {
+	opacity: 1;
+	/* border-bottom: 3px solid rgb(171,53,152);  */
+}
+.some {
+	transform: translate3d(0px, 0px, 0px) !important;
+	-webkit-transform: translate3d(0px, 0px, 0px) !important;
+	-moz-transform: translate3d(0px, 0px, 0px) !important;
+	-o-transform: translate3d(0px, 0px, 0px) !important;
+	-ms-transform: translate3d(0px, 0px, 0px) !important;
+
+}
+.swiper1 {
+	/*height: 475px !important;*/
+height:auto;
+}
+/*tab slider code css end*/
+.menu-logo{
+	margin-top:10px;
+}
+ .img-moving-top{
+	margin-top:10px;
+	width:230px;
+	height:auto;
+ }
+.box-tech{
+	padding:10px;
+	border:1px solid #eeeeee;
+	margin-top:15px;
+	box-shadow:2px 2px 2px #eeeeee;
+	/* background-color:#f2f2f2; */
+	background-color:#ededed;
+}
+
+
+.form-control:focus{
+ border-bottom:1px solid rgb(221,221,221); 
+box-shadow:inset 0 1px 1px #fff, 0 0 8px #fff;
+}
+.space-top{
+	margin-top:10px;
+}
+.input-group-addon{
+background-color:rgb(41,158,98);
+color:#fff;
+}
+.view-tech-txt{
+	font-size: 13px;
+    position: absolute;
+    top: -12px;
+    left: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #000;
+    width: 100%;
+}
+.view-small-txt {
+    position: absolute;
+    top:0px;
+    left: 30px;
+    margin-top: 17px;
+    color: #b3b3b3;
+    width: 100%;
+        font-size: 12px;
+}
+.view-small-txt2{
+	position: absolute;
+	top: 0;
+	left: 30px;
+	margin-top:44px;
+	color:	#b3b3b3;
+	width:100%;
+	    font-size: 12px;
+}
+.view-small-txt3{
+	position: absolute;
+	top: 15px;
+	left: 30px;
+	margin-top:44px;
+	color:	#b3b3b3;
+	width:100%;
+	    font-size: 12px;
+}
+.view-popup-box-header{
+	background-color:#00aeef;
+	color:#fff;
+}
+.popup-img-border{
+border:1px solid #b3b3b3;
+box-shadow:2px 2px 2px #b3b3b3;
+margin-top:-55px;
+}
+.view-small-txt1{
+	color:	#969696;
+	text-align:center;
+}
+
+/*input with inside icon*/
+.form-control{
+height: 36px;
+width: 100%;
+border: none;
+border-radius: 0 !important;
+font-size: 14px;
+font-weight: 300;
+padding: 0;
+background-color: transparent;
+box-shadow: none;
+ border-bottom:1px solid rgb(221,221,221); 
+}
+
+.center-block {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 37px;
+    font-size: 14px;
+    padding: 10px 16px 10px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+    height: 30px;
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+    font-size: 16px;
+    margin-left: 0;
+    left: 11px;
+    top: 4px;
+	color:#00aeef;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+    margin-left: 0;
+    font-size: 12px;
+    left: 5px;
+    top: -1px
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    /* color: #2580db; */
+}
+/*input with inside icon end*/
+
+
+/*input file code css*/
+.image-preview-input {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #fff;
+    background-color: rgb(55,58,150);
+    border-color: rgb(55,58,150);    
+}
+.image-preview-input:hover {
+	  background-color: rgb(55,58,150);
+	  border-color: rgb(55,58,150); 
+	  color:#fff;
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+/*input file code css end*/
+
+
+.popup-txt{
+	text-align:left;
+}
+#remove-box{
+	color:#fff;
+	background:rgb(237,28,36);
+	padding: 6px 10px;
+	    position: absolute;
+    top: opx;
+    left:57%;
+
+	border-radius:51%;
+	box-shadow:2px 2px 2px #000;
+}
+.deactive{
+position: absolute;
+top: 36px;
+left:51%;
+}
+/*--------branch css code--------*/
+.modal-header .close {
+    margin-top: -27px;
+    margin-right: -20px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px gray;
+}
+#header-popup-icn{
+	color:#fff;
+	font-size:19px;
+}
+#demo-popup{
+	text-decoration:none;
+	color:rgb(179,179,179);
+}
+/*-------------------------------next page code css instersted----------------------------*/
+.demo-header{
+	background-color:#00aeef;
+	padding:7px;
+	color:#fff;
+}
+.history-day-mnth{
+	background-color:#fff;
+	border:1px solid #b3b3b3;
+	width:55%;
+	 margin:0px auto 0px auto; 
+	float:right;
+}
+.mnth-txt{
+	background-color:#b22222;
+	color:#fff;
+	padding:5px;
+	margin:0px;
+	text-align: center;
+}
+.time-txt{
+	padding: 2px;
+    margin: 0px;
+}
+
+
+/*----------select-----------*/
+.selectdiv {
+  position: relative;
+    float: left;
+ width:100%;
+}
+
+/* IE11 hide native button (thanks Matt!) */
+select::-ms-expand {
+display: none;
+}
+
+.selectdiv:after {
+  content: url(../images/down.png);
+  
+ 
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+  right: 11px;
+  /*Adjust for position however you want*/
+  
+  top:26px;
+  padding: 0 0 2px;
+ 
+  /*left line */
+  
+  position: absolute;
+  pointer-events: none;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Add some styling */
+  
+  display: block;
+  width: 100%;
+  max-width:100%;
+  height: 50px;
+  float: right;
+  margin: 5px 0px;
+  /* padding: 0px 24px; */
+  font-size: 16px;
+  line-height: 1.75;
+  color: #333;
+  
+  background-image: none;
+  
+  -ms-word-break: normal;
+  word-break: normal;
+}
+.popup-box-democlass{
+	list-style:none;
+}
+.popup-box-democlass li{
+	padding:9px;
+}
+#demo-back{
+	text-decoration:none;
+	color:#fff;
+	float:right;
+	margin-top: -31px;
+    margin-right: 7px;
+}
+
+
+/*----------div effect ----------*/
+.teacher-box{
+	margin-top:18%;
+}
+.immg-brder{
+	border:2px solid rgb(204,204,204);
+}
+
+
+.sub-box{
+	
+	border-bottom:1px solid rgb(204,204,204);
+	width:100%;
+	padding:11px;
+}
+
+
+.ripple {
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #bababa;
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+
+.test {
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+}
+
+
+/*-------------model box------------------*/
+
+
+/*******************************
+* MD DIALOG - MATERIAL DESIGN
+* Add "modal-sm" after "modal-dialog" class for smaller dialog.
+* Get free snippets on bootpen.com
+*******************************/
+/* ----- IMPORT ROBOTO FONT FOR MD ----- */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,100);
+
+/* ----- DIALOG/MODAL ----- */
+/* FADE/SCALE EFFECT */
+	.modal.fade .modal-dialog {
+		opacity: 0;
+		-webkit-transform: scale(0.1);
+			-ms-transform: scale(0.1);
+			 -o-transform: scale(0.1);
+				transform: scale(0.1);
+		-webkit-transition: all 0.3s ease;
+		   -moz-transition: all 0.3s ease;
+			 -o-transition: all 0.3s ease;
+				transition: all 0.3s ease;
+	}
+
+	.modal.fade.in .modal-dialog {
+		opacity: 1;
+		-webkit-transform: scale(1);
+			-ms-transform: scale(1);
+			 -o-transform: scale(1);
+				transform: scale(1);
+		-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			 -o-transform: translate3d(0%, 0, 0);
+				transform: translate3d(0%, 0, 0);
+				top:15%;
+	}
+
+/* DIALOG CONTENT */
+	.modal-content {
+		border: none;
+		border-radius: 2px;
+		-webkit-box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+		   -moz-box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+				box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+	}
+
+/* DIALOG HEADER */
+	.modal-header {
+		min-height: 16px;
+		padding: 18px;
+		border-bottom: none;
+	}
+
+	.modal-title {
+		font-weight: 500;
+		font-size:17px;
+	}
+
+	/* DIALOG BODY */
+	.modal-body {
+		padding: 0 10px;
+	}
+
+	.modal-body p {
+		font-weight: 400;
+		font-size: 14px;
+		color: #212121;
+		border-bottom: 1px solid #ddd;
+        padding: 5px
+	}
+
+	.modal-body .lead {
+		font-weight: 300;
+		font-size: 16px;
+		color: #757575;
+	}
+
+	.modal-body p:last-child,
+	.modal-body .lead:last-child {
+		margin-bottom: 0;
+	}
+
+/* DIALOG FOOTER */
+	.modal-footer {
+		margin-top: 24px;
+		padding: 8px 0;
+		border-top: none;
+	}
+
+	.modal-footer .btn {
+		height:40px;
+		margin-right: 8px;
+		padding: 8px 10px;
+		border: none;
+		border-radius: 0;
+		text-transform: uppercase;
+		font-weight: 500;
+		color: #009688;
+		background-color: #fff;
+	}
+
+	.modal-footer .btn:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	.modal-footer .btn:focus,
+	.modal-footer .btn:hover {
+		color: #00796B;
+	}
+
+	.modal-footer .btn + .btn {
+		margin-left: 0;
+	}
+
+	.modal-footer .btn + .btn:last-child {
+		margin-left: -4px;
+	}
+
+
+/* ----- v CAN BE DELETED v ----- */
+
+
+.demo {
+	padding-top: 60px;
+	padding-bottom: 110px;
+}
+
+.btn-demo {
+	margin: 15px;
+	padding: 10px 15px;
+	border-radius: 0;
+	font-size: 16px;
+	background-color: #FFFFFF;
+}
+
+.btn-demo:focus {
+	outline: none;
+}
+
+.demo-footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 15px;
+	background-color: #212121;
+	text-align: center;
+}
+
+.demo-footer > a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 16px;
+	color: #fff;
+}
+
+/*-------------button ripple effect------------*/
+/* Material style */
+button {
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 2px;
+  font-size:16px;
+  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
+  background:#00aeef;
+  width:100%;
+}
+
+/* Ripple magic */
+button{
+  position: relative;
+  overflow: hidden;
+}
+
+button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height:10px;
+  background: rgba(255, 255, 255, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+
+.statuss{
+			
+			background-color:#00aeef;
+			padding:10px;
+			width: 55%;
+            float: right;
+			color: #fff;
+            border-radius: 9px;
+			text-align:center;
+		}
+
+
+
+
+
+
+/*-----popup button-----------*/

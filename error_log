@@ -1,0 +1,69 @@
+[03-May-2017 13:07:47 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Admin_services::addpromotions() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin_services.php on line 2201
+[03-May-2017 13:07:53 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Admin_services::addpromotions() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin_services.php on line 2201
+[03-May-2017 13:08:17 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Admin_services::addpromotions() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin_services.php on line 2201
+[03-May-2017 13:09:06 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Admin_services::addpromotions() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin_services.php on line 2201
+[19-May-2017 15:29:08 Asia/Kolkata] PHP Fatal error:  Call to a member function save() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin_services.php on line 1584
+[29-May-2017 11:21:00 Asia/Kolkata] PHP Fatal error:  Call to undefined method Enroll_students_model::getuserenrolls() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 411
+[29-May-2017 11:22:36 Asia/Kolkata] PHP Fatal error:  Call to undefined method Enroll_students_model::getuserenrolls() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 411
+[29-May-2017 11:24:27 Asia/Kolkata] PHP Fatal error:  Call to undefined method Enroll_students_model::getuserenrolls() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 411
+[29-May-2017 11:25:14 Asia/Kolkata] PHP Fatal error:  Call to undefined method Enroll_students_model::getuserenrolls() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 412
+[09-Jun-2017 10:52:52 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[09-Jun-2017 10:53:02 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[09-Jun-2017 10:56:07 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[09-Jun-2017 12:42:42 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[29-Jun-2017 13:17:15 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[29-Jun-2017 13:19:39 Asia/Kolkata] PHP Fatal error:  Cannot use object of type stdClass as array in /home/sitekhusaki/public_html/kaushik/system/libraries/Form_validation.php on line 461
+[04-Jul-2017 15:46:41 Asia/Kolkata] PHP Fatal error:  Call to undefined method Users_model::checkuser() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 1234
+[04-Jul-2017 17:41:28 Asia/Kolkata] PHP Fatal error:  Call to undefined method Users_model::checkuser() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 1234
+[04-Jul-2017 17:49:45 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 1239
+[04-Jul-2017 17:49:53 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 1239
+[05-Jul-2017 12:57:03 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[26-Jul-2017 15:19:42 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '?>' in /home/sitekhusaki/public_html/kaushik/application/views/admin_services/addpromotions.php on line 231
+[01-Aug-2017 12:01:08 Asia/Kolkata] PHP Fatal error:  Call to undefined method Leaves_model::getfeedbacks() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1536
+[01-Aug-2017 12:08:32 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:09:17 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:09:25 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:10:29 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:11:36 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:12:04 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:13:03 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 12:13:44 Asia/Kolkata] PHP Fatal error:  Call to undefined method Feedback_model::update() in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 1517
+[01-Aug-2017 15:41:58 Asia/Kolkata] PHP Fatal error:  Call to undefined method Promotional_offers_model::checkpromotion() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 332
+[01-Aug-2017 15:42:01 Asia/Kolkata] PHP Fatal error:  Call to undefined method Promotional_offers_model::checkpromotion() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 332
+[01-Aug-2017 15:45:56 Asia/Kolkata] PHP Fatal error:  Call to undefined method Promotional_offers_model::checkpromotion() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 334
+[01-Aug-2017 15:46:05 Asia/Kolkata] PHP Fatal error:  Call to undefined method Promotional_offers_model::checkpromotion() in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 334
+[02-Aug-2017 18:03:30 Asia/Kolkata] PHP Fatal error:  Call to undefined method Mastertable_model::checkuserbytype() in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 34
+[02-Aug-2017 18:04:57 Asia/Kolkata] PHP Fatal error:  Call to undefined method Mastertable_model::checkuserbytype() in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 34
+[02-Aug-2017 18:09:47 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:10:07 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:13:21 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:13:29 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:13:57 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:14:47 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:15:05 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[02-Aug-2017 18:16:37 Asia/Kolkata] PHP Fatal error:  Call to a member function sendsms() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Teachers.php on line 39
+[06-Sep-2017 19:50:39 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 702
+[06-Sep-2017 19:53:12 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 702
+[06-Sep-2017 19:59:08 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 703
+[07-Sep-2017 11:46:28 Asia/Kolkata] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or ${ (T_DOLLAR_OPEN_CURLY_BRACES) or {$ (T_CURLY_OPEN) in /home/sitekhusaki/public_html/kaushik/application/controllers/Admin.php on line 287
+[07-Sep-2017 12:42:08 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 291
+[07-Sep-2017 12:53:39 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 292
+[07-Sep-2017 12:58:51 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 292
+[07-Sep-2017 13:01:35 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 292
+[07-Sep-2017 13:04:24 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 292
+[07-Sep-2017 13:04:59 Asia/Kolkata] PHP Fatal error:  Call to a member function subject() on a non-object in /home/sitekhusaki/public_html/kaushik/application/controllers/Users.php on line 292
+[07-Sep-2017 19:10:59 Asia/Kolkata] PHP Fatal error:  Call to a member function userrelatedclasses() on a non-object in /home/sitekhusaki/public_html/kaushik_new/application/controllers/Users.php on line 1331
+[13-Mar-2018 12:54:49 Asia/Kolkata] PHP Parse error:  syntax error, unexpected 'alt' (T_STRING) in /home/sitekhusaki/public_html/kaushik_stage/application/views/admin/template/header.php on line 142
+[27-Jul-2018 14:28:07 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:15:24 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:17:44 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:17:47 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:17:51 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:17:59 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:17:59 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:18:00 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:18:00 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:18:01 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:19:12 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:19:14 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170
+[30-Jul-2018 18:19:17 Asia/Kolkata] PHP Fatal error:  Call to undefined function month() in /home/sitekhusaki/public_html/kaushik_stage/application/models/Enroll_students_model.php on line 170

@@ -1,0 +1,515 @@
+body {
+	font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+*:focus {
+    outline: none;
+}
+:link:focus, :visited:focus { outline: none; }
+/*-------------------------tab slider starts-------------------*/
+.swiper-container {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.swiper-slide {
+	background-size: cover;
+	/* overflow: scroll; */
+	background-position: center;
+
+}
+.swiper-slide h6 {
+	color: #fff;
+	text-align: center;
+}
+.gallery-top {
+	height: 100%;
+	width: 100%;
+}
+.gallery-thumbs {
+	
+	box-sizing: border-box;
+	
+	cursor: pointer;
+}
+.gallery-thumbs .swiper-slide {
+	width: 50%;
+	height:auto;
+	opacity: 0.9;
+	background-color:#00aeef;
+	color:#fff;
+	padding:12px;
+}
+.gallery-thumbs .swiper-slide-active {
+	opacity: 1;
+	/* border-bottom: 3px solid rgb(171,53,152);  */
+}
+.some {
+	transform: translate3d(0px, 0px, 0px) !important;
+	-webkit-transform: translate3d(0px, 0px, 0px) !important;
+	-moz-transform: translate3d(0px, 0px, 0px) !important;
+	-o-transform: translate3d(0px, 0px, 0px) !important;
+	-ms-transform: translate3d(0px, 0px, 0px) !important;
+
+}
+.swiper1 {
+	/*height: 475px !important;*/
+height:auto;
+}
+/*----------------------------slider tab end--------------------*/
+/*---menu code----*/
+.top-menu{
+position: fixed;
+top: 0;
+left: 0;
+z-index: 999;
+
+}
+.class-box{
+	margin-top:23%;
+	padding:10px;
+}
+.form-control{
+height: 36px;
+width: 100%;
+border: none;
+border-radius: 0 !important;
+font-size: 14px;
+font-weight: 300;
+padding: 0;
+background-color: transparent;
+box-shadow: none;
+ border-bottom:1px solid rgb(221,221,221); 
+}
+.form-control:focus{
+ border-bottom:1px solid rgb(221,221,221); 
+box-shadow:inset 0 1px 1px #fff, 0 0 8px #fff;
+}
+/*----icon with input----*/
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon, 
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+     line-height: 1.33;
+    /* height: 37px; */
+	height:46px;
+    font-size: 16px;
+    padding: 16px 16px 0px 40px;
+}
+
+.icon-addon.addon-sm .form-control {
+    height: 30px;
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+     font-size: 22px;
+    margin-left: 0;
+    left: 11px;
+    top: 12px;
+	color:#00aeef;
+}
+
+.icon-addon.addon-md .form-control,
+.icon-addon .form-control {
+    padding-left: 30px;
+    float: left;
+    font-weight: normal;
+}
+
+.icon-addon.addon-sm .fa,
+.icon-addon.addon-sm .glyphicon {
+    margin-left: 0;
+    font-size: 12px;
+    left: 5px;
+    top: -1px
+}
+
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    /* color: #2580db; */
+}
+/*input with inside icon end*/
+
+/*------upload file code----------*/
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 999px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+  height: 33px;
+  border-right:none;
+}
+
+
+/*-------------button ripple effect------------*/
+/* Material style */
+button {
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 2px;
+  font-size:16px;
+  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, .4); */
+  background:#00aeef;
+  width:100%;
+}
+
+/* Ripple magic */
+button{
+  position: relative;
+  overflow: hidden;
+}
+
+button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height:10px;
+  background: rgba(255, 255, 255, .5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+/*--------button ripple effect end-------*/
+
+/*-------div ripple effect start---------*/
+
+/*div  effect*/
+
+.ripple {
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #bababa;
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+
+.test {
+     background: #fff none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 2px #ccc;
+    cursor: pointer;
+    margin-bottom: 7px;
+    outline: medium none;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+/*--------div ripple effect end--------*/
+.immg-brder{
+	border: 1px solid #ccc;
+    border-radius: 50%;
+    height: 70px;
+    /* margin: 0 auto; */
+    padding: 1px;
+    width: 70px;
+}
+.immgg-cntr{
+	margin: 0 auto;
+}
+.txt-box{
+	position:absolute;
+	top: 22px;
+left: 59%;
+}
+.txt-box1{
+	position:absolute;
+	top: 22px;
+left:35%;
+}
+.active-box{
+	background-color: green;
+	color: #fff;
+	padding-top: 2px;
+	width: 40%;
+	position: absolute;
+	top: 40px;
+	left: 62px;
+	text-align: center;
+	border-radius: 30px;
+	/*margin-top: 2px;*/
+	opacity:0.6;
+}
+/*---popup style-----*/
+.view-popup-box-header{
+	background-color:#00aeef;
+	color:#fff;
+}
+.popup-img-border{
+border:1px solid #b3b3b3;
+box-shadow:2px 2px 2px #b3b3b3;
+}
+.view-small-txt1{
+	color:	#969696;
+	text-align:center;
+}
+.popup-class{
+	margin-top:10px;
+}
+.popup-class p{
+	border-bottom:1px solid rgb(204,204,204);
+	padding:7px;
+}
+
+#popup-txt:hover{
+	color:#00aeef;
+}
+#popup-txt{
+	color:#66696b;
+	text-decoration:none;
+	outline:none;
+	font-size: 17px;
+padding-left: 10px;
+}
+/*.modal-header .close {
+    margin-top: -27px;
+    margin-right: -20px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px gray;
+}*/
+.modal-header .close {
+    margin-top: -31px;
+    margin-right: -17px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px grey;
+    width: 31px;
+    height: 30px;
+}
+#header-popup-icn{
+	color:#fff;
+	font-size:19px;
+}
+#clsses-link{
+	color:#66696b;
+}
+.bg-clr-total-box{
+	background:#f3f3f3;
+	height:auto;
+}
+/*-------------popup effect----------*/
+/*******************************
+* MD DIALOG - MATERIAL DESIGN
+* Add "modal-sm" after "modal-dialog" class for smaller dialog.
+* Get free snippets on bootpen.com
+*******************************/
+/* ----- IMPORT ROBOTO FONT FOR MD ----- */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,100);
+
+/* ----- DIALOG/MODAL ----- */
+/* FADE/SCALE EFFECT */
+	.modal.fade .modal-dialog {
+		opacity: 0;
+		-webkit-transform: scale(0.1);
+			-ms-transform: scale(0.1);
+			 -o-transform: scale(0.1);
+				transform: scale(0.1);
+		-webkit-transition: all 0.3s ease;
+		   -moz-transition: all 0.3s ease;
+			 -o-transition: all 0.3s ease;
+				transition: all 0.3s ease;
+	}
+
+	.modal.fade.in .modal-dialog {
+		opacity: 1;
+		-webkit-transform: scale(1);
+			-ms-transform: scale(1);
+			 -o-transform: scale(1);
+				transform: scale(1);
+		-webkit-transform: translate3d(0%, 0, 0);
+			-ms-transform: translate3d(0%, 0, 0);
+			 -o-transform: translate3d(0%, 0, 0);
+				transform: translate3d(0%, 0, 0);
+				top:30%;
+	}
+
+/* DIALOG CONTENT */
+	.modal-content {
+		border: none;
+		border-radius: 2px;
+		-webkit-box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+		   -moz-box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+				box-shadow: 0 40px 77px rgba(0, 0, 0, 0.22), 0 27px 24px rgba(0, 0, 0, 0.2);
+	}
+
+/* DIALOG HEADER */
+	.modal-header {
+		min-height: 16px;
+		padding: 18px;
+		border-bottom: none;
+	}
+
+	.modal-title {
+		font-weight: 500;
+		font-size: 21px;
+		color:red;
+	}
+
+	/* DIALOG BODY */
+	.modal-body {
+		padding: 0 0px;
+	}
+
+	.modal-body p {
+		font-weight: 400;
+		font-size: 14px;
+		color: #212121;
+	}
+
+	.modal-body .lead {
+		font-weight: 300;
+		font-size: 16px;
+		color: #757575;
+	}
+
+	.modal-body p:last-child,
+	.modal-body .lead:last-child {
+		margin-bottom: 0;
+	}
+
+/* DIALOG FOOTER */
+	.modal-footer {
+		margin-top: 24px;
+		padding: 8px 0;
+		border-top: none;
+	}
+
+	.modal-footer .btn {
+		height:40px;
+		margin-right: 8px;
+		padding: 8px 10px;
+		border: none;
+		border-radius: 0;
+		text-transform: uppercase;
+		font-weight: 500;
+		color: #009688;
+		background-color: #fff;
+	}
+
+	.modal-footer .btn:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	.modal-footer .btn:focus,
+	.modal-footer .btn:hover {
+		color: #00796B;
+	}
+
+	.modal-footer .btn + .btn {
+		margin-left: 0;
+	}
+
+	.modal-footer .btn + .btn:last-child {
+		margin-left: -4px;
+	}
+	/*...................input button..............*/
+input[type=submit] {
+    border: 1px solid  #00aeef;
+    color: #fff;
+    background: #00aeef;
+    padding:2px 20px;
+    border-radius: 3px;
+    width:100%;
+    height:50px;
+}
+.txt-popup{
+        padding: 10px;
+    color: #ccc;
+    font-size: 20px;
+}
