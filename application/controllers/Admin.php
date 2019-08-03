@@ -3219,12 +3219,12 @@ class Admin extends MY_Controller {
         	$status = $this->input->get('status');
 
         	
-        	$all_users = $this->users_model->getusers();
+        	$all_users = $this->user_family_members_model->getusers();
         	$member_id=$this->input->get('member_id');
         	
         	//$enroll =$this->enroll_students_model->getuserswithbranch($member_id);
 			//$users = $this->users_model->getuserswithbranch($branch_id,$user_id,$status);
-			$users = $this->enroll_students_model->getuserswithbranch($branch_id,$user_id,$status);
+			$users = $this->enroll_students_model->getuserswithbranch($branch_id,$userid,$status);
         	$views = array('viewstudents');
         	$branches = $this->branches_model->getbranches(1);
         	$data = array('views'=>$views,'users'=>$users,"all_users"=>$all_users,"branches"=>$branches, 'user_id'=>$userid);

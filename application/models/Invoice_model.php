@@ -57,14 +57,14 @@ class Invoice_model extends CI_Model {
 	public function getinvoicebyusers($user_id)
 	{	
 
-		$this->db->select("(e.id) as id, um.name, c.class_name, i.id as invoice_id, i.enroll_student_id, i.invoice_month, i.invoice_year, e.course_fee, COALESCE(sum(pi.amount),0) as paid_amount, (e.course_fee-COALESCE(sum(pi.amount),0)) as balance_amount, i.comments,(e.total_sessions) as total_sessions,(e.end_date) as end_date,(e.plan) as plan,(e.sessions_per_week) as session_per_week, (e.next_fees_due_date)as due_date, um.branch_id,e.class_id,count(student_attendence.enroll_id BETWEEN e.start_date AND e.end_date) as attendance"  );
+		$this->db->select("(e.id) as id, um.name, c.class_name, i.id as invoice_id, i.enroll_student_id, i.invoice_month, i.invoice_year, e.course_fee, COALESCE(sum(pi.amount),0) as paid_amount, (e.course_fee-COALESCE(sum(pi.amount),0)) as balance_amount, i.comments,(e.total_sessions) as total_sessions,(e.end_date) as end_date,(e.plan) as plan,(e.sessions_per_week) as session_per_week, (e.next_fees_due_date)as due_date, um.branch_id,e.class_id");
 
 		$this->db->join("invoice i"," i.enroll_student_id=e.id and i.paid_status=1");
 		$this->db->join("payments_invoice pi"," pi.enroll_student_id=i.enroll_student_id and i.id=pi.invoice_id ",'left');
 		$this->db->join("user_family_members um","um.id=e.member_id");
 		$this->db->join("plans p","p.class_id=e.class_id and p.branch_id=um.branch_id",'left');
 		$this->db->join("classes c","c.id=e.class_id");
-		$this->db->join("student_attendence","student_attendence.enroll_id=e.id");
+		//$this->db->join("student_attendence","student_attendence.enroll_id=e.id");
 		//$this->db->where("student_attendence.date<= e.start_date");
 		//$this->db->where("student_attendence.date>=e.end_date");
 		$this->db->where('e.user_id',$user_id);

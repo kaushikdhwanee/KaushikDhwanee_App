@@ -179,7 +179,7 @@ class Enroll_students_model extends CI_Model {
         $this->db->where("enroll_students.status", 1);
 		$this->db->where ("enroll_students.next_fees_due_date <=", $date);
 		//$this->db->where ("enroll_students.status", 1);
-        $this->db->where('enroll_students.id NOT IN(select enroll_student_id from invoice WHERE invoice.invoice_date <="'.$date.'" AND invoice.invoice_date >= "'.$enddate.'" AND invoice.paid_status = 1)');
+        $this->db->where('enroll_students.id NOT IN(select enroll_student_id from invoice WHERE invoice.invoice_date <="'.$date.'" AND invoice.invoice_date >= "'.$enddate.'")');
 		//$query = $this->db->query("SELECT `enroll_students`.*, users.branch_id FROM `enroll_students` JOIN users on users.id=enroll_students.user_id  where `enroll_students`.`status` = 1 and 
 			//enroll_students.next_fee_due_date <= $date and enroll_students.id not in 
 				//(select enroll_student_id from invoice WHERE `invoice`.`invoice_date` <= $date AND `invoice`.`invoice_end_date`>= $enddate )");

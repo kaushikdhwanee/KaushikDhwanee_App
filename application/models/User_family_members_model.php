@@ -60,6 +60,24 @@ class User_family_members_model extends CI_Model {
 	}
 	
 */
+public function getusers($status=null)
+	{		
+		$this->db->select("users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type, group_concat(classes.class_name) as class_names, enroll_students.id as enroll_student_id,(enroll_students.total_sessions) as total_sessions");
+		$this->db->join("users","users.id=user_family_members.id");
+		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		
+
+
+		if(!empty($status))
+		{
+			$this->db->where("user_family_members.users_status",$status);
+		}
+		$this->db->group_by("user_family_members.id");
+		$this->db->order_by("user_family_members.id","desc");
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();			 
+	}
 	public function update($userDetails, $user_id)
 	{
 		

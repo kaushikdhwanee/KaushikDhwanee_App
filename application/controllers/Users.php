@@ -199,6 +199,8 @@ class Users extends MY_Controller {
 				$final_amount = $this->input->post('final_amount');
 				$payment_through = $this->input->post('payment_through');
 				$other_info = $this->input->post('other_info');
+				$date = Date('m-d-y');
+				$time =Date('H:i:s');
 
 
 				//$known_from =  (!empty($known_from)?implode(",", $known_from):"");
@@ -312,7 +314,7 @@ class Users extends MY_Controller {
 
 
 						$userDetails = array('branch_id'=> $branch_id,
-									 'message'=> "Welcome to KaushikDhwanee! Payment of Rs $final_amount has been made successfully on date('d-m-Y',strtotime($date)) at date('h:i A',strtotime($date))",
+									 'message'=> "Welcome to KaushikDhwanee! Payment of Rs $final_amount has been made successfully on $date at $time",
 									 'user_id'=>$response,
 									 'created_on'=>date("Y-m-d H:i:s")
 									);
@@ -321,12 +323,13 @@ class Users extends MY_Controller {
 
 
 						$message = "Welcome $name to KaushikDhwanee. You have been successfully registered, Payment of Rs $final_amount has been made successfully. Team KAUSHIKDHWANEE";//You have been successfully registered
- 						$response = $this->sms->sendsms($mobile,$message);
+ 						$responses = $this->sms->sendsms($mobile,$message);
 
 						//echo "1";
 						$result=$this->users_model->getuserinfo($response);
 						$result['success']=1;
-						echo json_encode($result);exit;
+						echo json_encode($result);
+						exit;
 						
 					}else
 					{
@@ -667,7 +670,7 @@ class Users extends MY_Controller {
 		public function payment_success_service()
 	    {
 	    	
-	    	$parameters = array("member_id","user_id","total_amount","final_amount","invoice_id","amount","enroll_student_id","start_dates","end_dates","total_session","classes");
+	       array("member_id","user_id","total_amount","final_amount","invoice_id","amount","enroll_student_id","start_dates","end_dates","total_session","classes");
 
  			$_POST = json_decode(file_get_contents("php://input"), true);
  			
@@ -675,12 +678,14 @@ class Users extends MY_Controller {
  			$this->form_validation->set_rules('user_id','user_id','trim|required');
  			$this->form_validation->set_rules('total_amount','total_amount','trim|required');
  			$this->form_validation->set_rules('final_amount','final_amount','trim|required');
- 			$this->form_validation->set_rules('payment_through','payment_through','trim|required');
+			 $this->form_validation->set_rules('payment_through','payment_through','trim|required');
+			 
  			
  			if($this->form_validation->run())
  			{
-		    	extract($_POST);
-
+				extract($_POST);
+				$ammounts = $final_amount;
+				//if(!empty($enroll_student_id) && !empty($amount)){
 			    $userDetails = array(
 								 'member_id'=>$member_id,
 								 'total_amount'=>$total_amount,
@@ -692,20 +697,37 @@ class Users extends MY_Controller {
 								);
 				
 				$payment_id = $this->payments_model->save($userDetails);
-
-				if(!empty($invoice_id) && !empty($enroll_student_id) && !empty($amount)){
-					$invoces = explode(",", $invoice_id);
+				//}
+				if(!empty($enroll_student_id) && !empty($amount)){
+					$Start_dates = explode(",", $Start_dates);
+					$end_dates = explode(",", $end_dates);
+					$total_session = explode(",", $total_session);
 					$amounts = explode(",", $amount);
+					$classes = explode(",", $classes);
 					$enroll_student_id = explode(",", $enroll_student_id);
-					foreach ($invoces as $key => $value) {	
+					foreach ($enroll_student_id as $key => $value) {	
 				
                 $userDetails1 = array(
-					'start_date'=>$Start_dates,
-					'end_date'=>$end_date,
-					'total_sessions'=>$total_session,
-					'sessions_per_week'=>$classes
+					'start_date'=>$Start_dates[$key],
+					'end_date'=>$end_dates[$key],
+					'total_sessions'=>$total_session[$key],
+					'sessions_per_week'=>$classes[$key],
+					'course_fee'=>$amounts[$key]
 				) ;
+				$this->enroll_students_model->update($userDetails1,$value);
 				}
+				
+
+				$payments = array();
+				foreach ($amounts as $key => $value){
+					$usersz = array("enroll_student_id"=>$enroll_student_id[$key],
+														'amount'=>$value,
+														'user_id'=>$user_id,
+														'payment_id'=>$payment_id
+													);
+													array_push($payments, $usersz);
+				}
+				$this->payments_invoice_model->save($payments);
 			}
 			if(!empty($invoice_id) && !empty($enroll_student_id) && !empty($amount))
 			{
@@ -735,6 +757,7 @@ class Users extends MY_Controller {
 				}
 
 			}
+			
 
 		    $response_data = array(
 		            "payment_id" => $payment_id,
@@ -786,7 +809,7 @@ class Users extends MY_Controller {
 				$this->email->send();*/
 
 				$username = $user_info['name'];
-				$message = "Dear $username, Received fees Rs $amount. Thank you, Team KAUSHIKDHWANEE";
+				$message = "Dear $username, Received fees Rs $ammounts. Thank you, Team KAUSHIKDHWANEE";
  				$response = $this->sms->sendsms($user_info['mobile'],$message);
 				//echo "1";
 				$result=$this->users_model->getuserinfo($user_id);

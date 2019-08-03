@@ -113,7 +113,7 @@
 
                            </div></td>
                            <td>  <div class="text-muted text-size-small">
-                           	<div class="form-control col-md-2" id="session_taken" name="session_taken" value="<?=$value['attendance']?>"placeholder=""  ><?=$value['attendance']?></div>
+                           	<div class="form-control col-md-2" id="session_taken" name="session_taken" value=""placeholder=""  ><?=$value['attendance']?></div>
                            	
                            	<input type="date" class="form-control" id="attendence_date" name="attendence_date" placeholder="" >
 
@@ -363,7 +363,7 @@
                          }
                          else{
                          	session_enddate="";
-                         	session_taken=0;
+                         	session_taken="0";
                          }
                          var cls = $row.find("td #plan_id").text();
 	

@@ -85,6 +85,7 @@ tr.shown td.details-control {
                                           foreach ($branches as $cat_info) 
                                           {
                                              ?>
+                                             <option value=""></option>
                                               <option value="<?=$cat_info['id']?>"<?=($this->input->get('branch_id'))==$cat_info['id']?"selected":""?>><?=$cat_info['branch_name']?></option> 
                                      <?php   }
                                        }
