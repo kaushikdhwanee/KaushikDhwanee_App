@@ -511,15 +511,17 @@ class Users extends MY_Controller {
 			if($this->form_validation->run())
 			{
 				$user_id = $this->input->post('user_id');
-				//$member_id = $this->input->post('member_id');
+				
 				$members = $this->user_family_members_model->getmembers($user_id);
 				$classeslist  = $this->classes_model->getclasses();
 				$sessions=$this->enroll_students_model->gettotalsession($user_id);
-				$attendence = $this->enroll_students_model->getuser($user_id);
+
+				
+				//$attendence = $this->enroll_students_model->getuser($user_id);
 				foreach ($members as $member_info) 
 				{
 					$classes = $this->enroll_students_model->getuserenrolls($member_info['id']);
-					//$sessions=$this->enroll_students_model->getuserenrolls($member_info['id'])
+					
 					if(!empty($classes))
 					{
 						$results1= array();
@@ -530,12 +532,21 @@ class Users extends MY_Controller {
 					}
 
 				}
+				$students=$this->enroll_students_model->getenrolls($user_id);
+				if(!empty($students)){
+				foreach ($students as $student_info){
+
+				$attendence = $this->enroll_students_model->attendence($student_info['id']);
+				$results[$student_info['id']] = $attendence;
+				}
+			}
 
 	        	//$results = $this->plans_model->getplan($branch_id,$class_id);
 	        	$results['classes'] =  $classeslist;
 	        	$results['members'] =  $members;
 				$results['sessions'] =$sessions;
-				$results['attendence'] = $attendence;
+				$results['attendence']=$attendence;
+				$results['students'] = $students;
 	        	$results['image_url'] = base_url("uploads/class_images");
 	        	$results['success'] = 1;
 	        	echo json_encode($results);
@@ -616,11 +627,18 @@ class Users extends MY_Controller {
 				
 				if(!empty($user_id)){
 				$users = $this->enroll_students_model->getuserbeforeenddate($user_id);
-				$attendence=$this->enroll_students_model->getuseradv($user_id);
+				if(!empty($users)){
+					foreach ($users as $user_info){
+	
+					$attendence = $this->enroll_students_model->attendence($user_info['id']);
+					$result[$user_info['id']] = $attendence;
+					}
+				}
+				//$attendence=$this->enroll_students_model->getuseradv($user_id);
 				
 				$result['data'] = $users;
 				
-				$result['sessioncount']=$attendence;
+				//$result['sessioncount']=$attendence;
 				
 				$result['success']=1;
 				echo json_encode($result);

@@ -29,8 +29,8 @@ class Enroll_students_model extends CI_Model {
 	}
 	public function getuser($user_id)
 	{
-		$this->db->select("enroll_students.id, enroll_students.total_sessions, COALESCE(count(student_attendence.enroll_id), 0) as attendence");
-		$this->db->join("student_attendence","student_attendence.enroll_id=enroll_students.id","left outer");
+		$this->db->select("enroll_students.id, enroll_students.total_sessions, count(student_attendence.enroll_id) as attendence");
+		$this->db->join("student_attendence","student_attendence.enroll_id=enroll_students.id");
 		$this->db->where("student_attendence.date >= enroll_students.start_date");
 		$this->db->where("student_attendence.date <= enroll_students.end_date");
 		$this->db->where('enroll_students.user_id',$user_id);
@@ -39,6 +39,8 @@ class Enroll_students_model extends CI_Model {
         return $query->result_array();
 				 
 	}
+	
+
 	public function getuseradv($user_id)
 	{
 		$this->db->select("enroll_students.id, enroll_students.total_sessions, COALESCE(count(student_attendence.enroll_id), 0) as attendence");
@@ -362,7 +364,7 @@ class Enroll_students_model extends CI_Model {
             return $query->result_array();	
 }
 public function attendence($enroll_id){
-	$this->db->select("enroll_students.id, count(student_attendence.enroll_id) as attendence");
+	$this->db->select("enroll_students.*, count(student_attendence.enroll_id) as attendence");
 	$this->db->join("student_attendence",'student_attendence.enroll_id=enroll_students.id');
     $this->db->where("student_attendence.date >= enroll_students.start_date");
     $this->db->where("student_attendence.date <= enroll_students.end_date");
@@ -401,7 +403,7 @@ public function attendencebyuser($user_id){
 	{	
 		$this->db->select("enroll_students.id,student_attendence.date");
 		$this->db->join("classes","classes.id=enroll_students.class_id","inner");
-		$this->db->join("attendence_list","attendence_list.enroll_student_id=enroll_students.id");
+		//$this->db->join("attendence_list","attendence_list.enroll_student_id=enroll_students.id");
 		$this->db->join("student_attendence","student_attendence.enroll_id=enroll_students.id");
 		//$this->db->where("MONTH(attendence.date)","MONTH(now())");
 		$this->db->where('enroll_students.id', $enroll_id);
@@ -414,8 +416,8 @@ public function attendencebyuser($user_id){
 	{	
 		$this->db->select("enroll_students.id,student_attendence.date");
 		$this->db->join("classes","classes.id=enroll_students.class_id","inner");
-		$this->db->join("attendence_list","attendence_list.enroll_student_id=enroll_students.id");
-		$this->db->join("student_attendence","student_attendence.enroll_id=attendence_list.enroll_student_id and DATE_FORMAT(student_attendence.date,'%Y-%m')='$date'");
+		//$this->db->join("attendence_list","attendence_list.enroll_student_id=enroll_students.id");
+		$this->db->join("student_attendence","student_attendence.enroll_id=enroll_students.id and DATE_FORMAT(student_attendence.date,'%Y-%m')='$date'");
 		//$this->db->where("MONTH(attendence.date)","MONTH(now())");
 		$this->db->where('enroll_students.id', $enroll_id);
 	//	$this->db->group_by('attendence.date');

@@ -67,7 +67,7 @@ WHERE `e`.`batch_class_id` = '$batch_class_id' group by `e`.`enroll_student_id`"
 	public function update($userDetails, $category_id)
 	{
 		
-		$this->db->where('id', $category_id);
+		$this->db->where('enroll_student_id', $category_id);
 		return $this->db->update(self::TABLE_NAME, $userDetails);				 
 	}
 

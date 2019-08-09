@@ -163,4 +163,10 @@ class Invoice_model extends CI_Model {
 		$this->db->where('id', $category_id);
 		return $this->db->delete(self::TABLE_NAME);				 
 	}
+	public function update($userDetails,$category_id)
+	{
+		
+		$this->db->where('id', $category_id);
+		return $this->db->update(self::TABLE_NAME, $userDetails);				 
+	}
 }

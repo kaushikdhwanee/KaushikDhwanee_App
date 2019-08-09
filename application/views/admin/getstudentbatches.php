@@ -103,17 +103,17 @@
                         
 
 						<td>  <div class="text-muted text-size-small">
-                           	<input type="text" class="form-control" id="session_week" name="session_week[<?=$value['id']?>]" value="<?=$value['session_per_week']?>"placeholder="" >
-                            <input type="text" class="form-control" id="enroll_id" name="enroll_id[<?=$value['id']?>]" value="<?=$value['id']?>"placeholder="" >
+                           	<input type="text" class="form-control" id="session_week" name="session_week[<?=$value['invoice_id']?>]" value="<?=$value['session_per_week']?>"placeholder="" >
+                            <input type="text" class="form-control" id="enroll_id" name="enroll_id[<?=$value['invoice_id']?>]" value="<?=$value['id']?>"placeholder="" >
                            </div></td>
                            <!--<td class="hidden"><input type="text" class="form-control" id="class_id" name="class_id" value="<?=$value['class_id']?>"placeholder="" ></td>
                            <td class="hidden"><input type="text" class="form-control" id="branch_id" name="branch_id" value="<?=$value['branch_id']?>"placeholder="" ></td>-->						
                            <td>  <div class="text-muted text-size-small">
-                           	<input type="text" class="form-control" id="total_session" name="total_sessions[<?=$value['id']?>]" value="<?=$value['total_sessions']?>"placeholder=""  >
+                           	<input type="text" class="form-control" id="total_session" name="total_sessions[<?=$value['invoice_id']?>]" value="<?=$value['total_sessions']?>"placeholder=""  >
 
                            </div></td>
                            <td>  <div class="text-muted text-size-small">
-                           	<div class="form-control col-md-2" id="session_taken" name="session_taken" value=""placeholder=""  ><?=$value['attendance']?></div>
+                           	<input type="text" class="form-control col-md-2" id="session_taken" name="session_taken[<?=$value['invoice_id']?>]" value=""readonly="readonly"  ></div>
                            	
                            	<input type="date" class="form-control" id="attendence_date" name="attendence_date" placeholder="" >
 
@@ -121,7 +121,7 @@
                            <td class="hidden"><div class="text-muted text-size-small">
 							<div class="input-group">
 										<span class="input-group-addon"><i class="icon-calendar"></i></span>
-										<input type="text" class="form-control" id="hiddendate" name="startdate[<?=$value['id']?>]" value="<?=$value['due_date']?>"placeholder="" >
+										<input type="text" class="form-control" id="hiddendate" name="startdate[<?=$value['invoice_id']?>]" value="<?=$value['due_date']?>"placeholder="" >
 						</div>
 						</div> 
 
@@ -129,7 +129,7 @@
 						<td>  <div class="text-muted text-size-small col-md-2">
 							<div class="input-group">
 										<span class="input-group-addon"><i class="icon-calendar"></i></span>
-										<input type="date" class="form-control" id="start_date" name="start_date[<?=$value['id']?>]" value= "" placeholder="" class="start_date">
+										<input type="date" class="form-control" id="start_date" name="start_date[<?=$value['invoice_id']?>]" value= "" placeholder="" class="start_date">
 						</div>
 						</div> 
 
@@ -137,14 +137,14 @@
 						<td>  <div class="text-muted text-size-small">
 							<div class="input-group">
 										<span class="input-group-addon"><i class="icon-calendar"></i></span>
-										<input type="date" class="form-control" name="end_date[<?=$value['id']?>]" id="end_date" value=""placeholder="">
+										<input type="date" class="form-control" name="end_date[<?=$value['invoice_id']?>]" id="end_date" value=""placeholder="">
 						</div>
 						</div> 
 
 						</td>
                        <td>
 					  <div class="text-muted text-size-small" id="course_fee"><i class="fa fa-inr" aria-hidden="true"></i> 
-					  <input type="text" class="form-control" id="course_fee[<?=$value['id']?>]" name="course_fee" value="<?=$value['course_fee']?>"placeholder="" ></div> 
+					  <input type="text" class="form-control" id="course_fee" name="course_fee[<?=$value['invoice_id']?>]" value="<?=$value['course_fee']?>"placeholder="" ></div> 
 
 					  </td>
 
@@ -156,7 +156,7 @@
 
 					    <td> 
 
-					   <div class="text-muted text-size-small" id="balance_amount" name="balance_amount[<?=$value['id']?>]"><i class="fa fa-inr" aria-hidden="true"></i> <?=round($value['balance_amount'],2);?></div> 
+					   <div class="text-muted text-size-small" id="balance_amount" name="balance_amount[<?=$value['invoice_id']?>]"><i class="fa fa-inr" aria-hidden="true"></i> <?=round($value['balance_amount'],2);?></div> 
 
 					   </td>
 
@@ -206,7 +206,7 @@
 
 					 <tr>
 
-					    <td colspan="10"><div class="text-muted text-size-small text-center"><b>TOTAL</b></div></td>
+					    <td colspan="9"><div class="text-muted text-size-small text-center"><b>TOTAL</b></div></td>
 
 						 <td >  <div class="text-muted text-size-small" id="total_amount"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount?></div> </td>
 						 <td >  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount_paid?></div> </td>
@@ -368,7 +368,7 @@
                          var cls = $row.find("td #plan_id").text();
 	
                            
-                            $row.find("td #session_taken").text(session_taken);
+                            $row.find("td #session_taken").val(session_taken);
 
                            total_session = $row.find("td #total_session").val();
 

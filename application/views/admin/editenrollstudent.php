@@ -402,6 +402,10 @@ var total_sessions=$("#total_sessions").val();
                          session_taken = resp.count;
                         
                          }
+						 else{
+                         	session_enddate="";
+                         	session_taken="0";
+                         }
                          var str = $("#plan_id").val();
                          var str1 = str.split("|");
                          var cls = str1[0];
@@ -446,8 +450,8 @@ else
     if (month1 < 10) month1 = "0" + month1;
     if (day1 < 10) day1 = "0" + day1;
 
-     today = year + "-" + month + "-" + day;
-    var end_date = year1 + "-" + month1 + "-" + day1;
+     today = day + "-" + month + "-" + year;
+    var end_date = day1 + "-" + month1 + "-" + year1;
 
 	$("#datepicker2").attr("value", today);
 
@@ -713,10 +717,10 @@ $(this).val(day);
             }
 			
             $("#datepicker1").val($.datepicker.formatDate("dd-mm-yy", dat));
-		 	total_amount =parseFloat(course_fee);
-			   				$("#total_amount").val(parseFloat(total_amount).toFixed(2));
+		 	//total_amount =parseFloat(course_fee);
+			   				//$("#total_amount").val(parseFloat(total_amount).toFixed(2));
 			   				
-			   				$("#final_amount").val(Math.round(total_amount));
+			   				//$("#final_amount").val(Math.round(total_amount));
 			   				$(".select").selectpicker("refresh")
 			   	
 			   		}

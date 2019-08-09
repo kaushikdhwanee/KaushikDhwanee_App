@@ -39,6 +39,7 @@ class Admin extends MY_Controller {
 			$this->load->library('m_pdf');
 			$this->load->model('attendence_list_model');
 			//$this->load->model('student_attendence');
+			//$this->load->model('paytime_attendence');
 
 
 			$user_type = $this->session->userdata('user_type');
@@ -3711,20 +3712,20 @@ class Admin extends MY_Controller {
 				$total_sessions =$this->input->post('total_sessions');
 				$enroll_student_id = $this->input->post('enroll_student_id');
 
-				$count =count($enroll_student_id);
 				
-				error_log ($count);
+				
+				//error_log ($count);
 				error_log($end_date) ;
-				$next_fee_due = date("Y-m-d",strtotime($end_date. '+1 days'));
+				//$next_fee_due = date("Y-m-d",strtotime($end_date. '+1 days'));
 
 				$userDetails1 =array();
 				
 					
+				foreach ($payable_amount as $key =>$value){	
 					
-				foreach ($enroll_id as $key =>$value){	
 			    $userDetails1 = array(
 				
-				//'id'=>$enroll_student_id[n],
+				//'id'=>$enroll_student_id[$key],
 				'total_sessions'=>$total_sessions[$key],
 				'end_date' =>$end_date[$key],
 				'start_date'=> $start_date[$key],
@@ -3733,11 +3734,11 @@ class Admin extends MY_Controller {
 				'next_fees_due_date'=>$end_date[$key]
 			);
 			
-			$response = $this->enroll_students_model->update($userDetails1, $value );
+			$response = $this->enroll_students_model->update($userDetails1, $enroll_student_id[$key] );
 			
 			
-		}
-			
+		
+	}	
 				
 				$userDetails = array(
 								'user_id'=>$user_id,
@@ -3848,6 +3849,7 @@ class Admin extends MY_Controller {
 
 				$payable_amount = $this->input->post('final_amount');
 				$invoice = $this->input->post('invoice_id');
+				echo $invoice;
 				$admin_discount = $this->input->post('admin_discount');
                 $balance_amount =$this->input->post('balance_amount');
 				$comments = $this->input->post('comments');
@@ -3906,8 +3908,9 @@ class Admin extends MY_Controller {
 
 							array_push($total_batches, $userdata);
 						}
+						$this->enroll_students_batches_model->delete($enroll_student_id);
 
-						$resss = $this->enroll_students_batches_model->update($total_batches,$enroll_id);
+						$resss = $this->enroll_students_batches_model->save($total_batches);
 				}
 				if(!empty($payable_amount))
 				{
@@ -3924,12 +3927,16 @@ class Admin extends MY_Controller {
 					
 					$response = $this->payments_invoice_model->save(array($users));
 				}
-
+                     
 					if(!empty($invoice))
+					echo "<script>console.log({$invoice})</script>";
+					echo "<script>console.log('working')</script>";
 					{
-						 
-						
-							$this->invoice_model->updateinvoicestatus($invoice);
+						$user= array("paid_status"=>2,
+						'amount'=>$total_amount,
+						'final_amount'=>$final_amount);
+
+							$this->invoice_model->update($user,$invoice);
 							//echo $this->db->last_query();exit;
 												
 					}
