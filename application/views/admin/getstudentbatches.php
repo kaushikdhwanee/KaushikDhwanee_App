@@ -30,10 +30,7 @@
                         <th>Session Taken</th>
                         <th>Start Date</th>
                         <th>End Date
-                        <th> Total Amount</th>
-
-                        <th> Amount Paid</th>
-
+                        
                         <th> Amount Due</th>
 
 
@@ -90,7 +87,9 @@
 						            <option value="1|<?=$value['plan1']?>"<?php if($value['plan']==1) echo "SELECTED";?>> 24 Session (3 months) </option>
 						            <option value="2|<?=$value['plan2']?>"<?php if($value['plan']==2) echo "SELECTED";?>> 36 Session (3 months) </option>
 						            <option value="3|<?=$value['plan3']?>"<?php if($value['plan']==3) echo "SELECTED";?>> 48 Session (6 months) </option>
-						            <option value="4|<?=$value['plan4']?>"<?php if($value['plan']==4) echo "SELECTED";?>> 72 Session (6 months) </option>
+						            <option value="4|<?=$value['plan4']?>"<?php if($value['plan']==4) echo "SELECTED";?>> 72 Session (6 months)
+</option>
+
 
 														
 						                                
@@ -104,7 +103,8 @@
 
 						<td>  <div class="text-muted text-size-small">
                            	<input type="text" class="form-control" id="session_week" name="session_week[<?=$value['invoice_id']?>]" value="<?=$value['session_per_week']?>"placeholder="" >
-                            <input type="text" class="form-control" id="enroll_id" name="enroll_id[<?=$value['invoice_id']?>]" value="<?=$value['id']?>"placeholder="" >
+                            <input type="hidden" class="form-control" id="enroll_id" name="enroll_id[<?=$value['invoice_id']?>]" value="<?=$value['id']?>"placeholder="" >
+							<input type="hidden" class="form-control" id="member_id" name="member_id" value="<?=$value['member_id']?>"placeholder="" >
                            </div></td>
                            <!--<td class="hidden"><input type="text" class="form-control" id="class_id" name="class_id" value="<?=$value['class_id']?>"placeholder="" ></td>
                            <td class="hidden"><input type="text" class="form-control" id="branch_id" name="branch_id" value="<?=$value['branch_id']?>"placeholder="" ></td>-->						
@@ -113,9 +113,9 @@
 
                            </div></td>
                            <td>  <div class="text-muted text-size-small">
-                           	<input type="text" class="form-control col-md-2" id="session_taken" name="session_taken[<?=$value['invoice_id']?>]" value=""readonly="readonly"  ></div>
+                           	<input type="text" class="form-control col-md-2" id="session_taken" name="session_taken[<?=$value['invoice_id']?>]" value=""readonly="readonly"  >
                            	
-                           	<input type="date" class="form-control" id="attendence_date" name="attendence_date" placeholder="" >
+                           	<input type="hidden" class="form-control" id="attendence_date" name="attendence_date" placeholder="" >
 
                            </div></td>
                            <td class="hidden"><div class="text-muted text-size-small">
@@ -143,23 +143,14 @@
 
 						</td>
                        <td>
-					  <div class="text-muted text-size-small" id="course_fee"><i class="fa fa-inr" aria-hidden="true"></i> 
+					  <div class="text-muted text-size-small" ><i class="fa fa-inr" aria-hidden="true"></i> 
 					  <input type="text" class="form-control" id="course_fee" name="course_fee[<?=$value['invoice_id']?>]" value="<?=$value['course_fee']?>"placeholder="" ></div> 
 
 					  </td>
 
-					   <td> 
+					   
 
-					   <div class="text-muted text-size-small" id="paid_amount"><i class="fa fa-inr" aria-hidden="true"></i> <?=$value['paid_amount']?></div> 
-
-					   </td>
-
-					    <td> 
-
-					   <div class="text-muted text-size-small" id="balance_amount" name="balance_amount[<?=$value['invoice_id']?>]"><i class="fa fa-inr" aria-hidden="true"></i> <?=round($value['balance_amount'],2);?></div> 
-
-					   </td>
-
+					    
                        
 
                        
@@ -170,12 +161,12 @@
 
 										<label>
 
-											<input type="checkbox" <?=($value['course_fee']-$value['paid_amount'])==0?"disabled":""?>  data="<?=$i?>" class="styled check" data-id="<?=$value['balance_amount']?>" id="check">
+											<input type="checkbox" <?=$value['course_fee']==0?"disabled":""?>  data="<?=$i?>" class="styled check" data-id="<?=$value['course_fee']?>" id="check">
 
 										
 
 										</label>
-
+							</div>
 						
 
                         </td>
@@ -189,12 +180,12 @@
 					    </td>
 
                      </tr>
-                 </div>
+                
 
                       <?php	$i++;
                       $total_amount +=$value['course_fee'];
                       $total_amount_paid +=$value['paid_amount'];
-                      $total_amount_due +=($value['course_fee']-$value['paid_amount']);
+                      $total_amount_due +=$value['course_fee'];
                        
 
                       }}else{ //echo "<tr><td> NO Classes are there</td></tr>";
@@ -206,30 +197,36 @@
 
 					 <tr>
 
-					    <td colspan="9"><div class="text-muted text-size-small text-center"><b>TOTAL</b></div></td>
+					    <td colspan="9"><div class="text-muted text-size-small text-right"><b>TOTAL</b></div></td>
 
-						 <td >  <div class="text-muted text-size-small" id="total_amount"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount?></div> </td>
-						 <td >  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount_paid?></div> </td>
+						 
+						
 
-						 <td colspan="2">  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount_due?></div> </td>
+						 <td >  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i> <span class="form-control"style="color:red;"><?=$total_amount_due?></span></div> </td>
+						 <td></td>
 
-						 <td>  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i><span id="total_amount_display"></span> </div> </td>
+						 <td >  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i><span id="total_amount_display" class="form-control"style="color:green;"></span> </div> </td>
 
 					 </tr>
 
 					  <tr>
 
-					    <td colspan="6">
-
-						<div class="text-muted text-size-small">
-
+					    <td colspan="7">
+                       
+						<div class="text-muted text-size-small text-right">
+                          <label>Discount</label>
+							</div>
+						  </td>
+						  <td colspan="3">
+                       
+						<div class="text-muted text-size-small text-right">
 					        <div class="input-group">
-
-											<input type="text" class="form-control" id="admin_discount" name="admin_discount" placeholder="Enter Discount" value="">
-
+								
+											<input type="text" class="form-control" id="admin_discount" name="admin_discount" placeholder="Enter Discount %" value="">
+								
 											<span class="input-group-btn">
 
-												<button class="btn btn-default black legitRipple" id="apply" type="button">Apply</button>
+												<button class="btn btn-success" id="apply" type="button">Apply</button>
 
 											</span>
 
@@ -241,13 +238,13 @@
 
 						 <td>
 
-						  <i class="fa fa-minus" aria-hidden="true"></i> 
+						  
 
 						  </td>
 
 						 
 
-						 <td>  <div class="text-muted text-size-small"> <i class="fa fa-inr" aria-hidden="true"></i> <span id="admin_discount_amount"></span></div> </td>
+						 <td>  <div class="text-muted text-size-small"> <i class="fa fa-inr" aria-hidden="true"></i> - <span id="admin_discount_amount" class="form-control"></span></div> </td>
 
 					 </tr>
 
@@ -255,13 +252,13 @@
 
 					  <tr>
 
-					    <td colspan="9"><div class="text-muted text-size-small text-center"><b>GRAND TOTAL</b></div></td>
-
-						 <td colspan="3">  <div class="text-muted text-size-small" id="total_amount"><i class="fa fa-inr" aria-hidden="true"></i> <?=$total_amount?></div> </td>
-
-						 <td>  <div class="text-muted text-size-small"><i class="fa fa-inr" aria-hidden="true"></i> <span id="final_amount_display"></span></div> </td>
+					    <td colspan="10"><div class="text-muted text-size-small text-right"><b>GRAND TOTAL</b></div></td>
+						  <td></td>
+						 
+						 <td>  <div class="text-muted"><span id="final_amount_display" class="form-control" style="font-weight:bold;color:green"></span></div> </td>
 
 					 </tr>
+						
 					 </tbody>
 
                </table>
@@ -272,13 +269,13 @@
 
 			   <div class="col-md-12 margin-0">
 
-			   <div class="form-group col-md-4">
+			   <div class="form-group col-md-4 ">
 
 									
 
-									<select name="payment_type" class="selectbox-mousedown" required>
+									<select name="payment_type" class="select form-control" required>
 
-									<option value="">Select Payment</option> 
+									<option value="">Payment Type</option> 
 
 										<option value="1">Cash</option> 
 
@@ -288,6 +285,8 @@
 
 		                                <option value="4">Cheque</option>
 		                                <option value="5">Paytm</option> 
+										<option value="6">GPay</option> 
+										<option value="7">Others</option> 
 
 
 									</select>
@@ -319,7 +318,7 @@
 			   <input type="hidden" name="total_amount" id="total_amount">
 
 		<!--<button type="submit" class="btn btn-primary active legitRipple center">Pay</button>-->
-<button type="button" data-loading-text="Loading..."  class="btn btn-primary">Pay Now</button>
+<button type="button" id="button" data-loading-text="Loading..."  class="btn btn-primary">Pay Now</button>
 		</div>
 </form> 
 <script>
@@ -336,7 +335,7 @@
 	var edate	
 	var diff;
 	var lastdate;
-	
+	 var cls
    	
 	$('tr#rows').each(function(i, row){
 		
@@ -365,7 +364,7 @@
                          	session_enddate="";
                          	session_taken="0";
                          }
-                         var cls = $row.find("td #plan_id").text();
+                         cls = $row.find("td #plan_id").text();
 	
                            
                             $row.find("td #session_taken").val(session_taken);
@@ -390,12 +389,16 @@
 
     
 
-    if(cls==1||cls==2){
+    if(cls==1||cls==2||cls==7){
     enddate.setDate(enddate.getDate() + 92);
 }
-else
+else if(cls==3||cls==4||cls==8)
 	{
 		enddate.setDate(enddate.getDate() + 182);
+}
+else if(cls==5||cls==6||cls==9)
+	{
+		enddate.setDate(enddate.getDate() + 365);
 }
 
 
@@ -437,7 +440,7 @@ else
 
 
 
-    $("button").click(function() {
+    $("#button").click(function() {
     //var $btn = $(this);
     //$btn.button('loading');
    $('#loading').show();
@@ -488,6 +491,19 @@ var amount;
 	});
 
 	
+		var y= $('tr#rows').length;
+     $(document).on("change",'#course_fee', function(){
+	$('tr#rows').each(function(index,value){
+		$row = $(value);
+      //start_date = $row.find('td #course_fee');
+
+      
+      var amt = $row.find('td #course_fee').val();
+			$row.find('td .check').data('id',amt);
+		
+	});
+	})
+		
 	 /*$(document).on("change","#plan_id",function(){
   	
 		   	var date = $('#start_date').val();
@@ -594,7 +610,7 @@ var amount;
 	   		$("#final_amount_display").text(final_amount);
 	   		$("#final_amount").val(final_amount);
 
-	   		$("#admin_discount_amount").val(admin_discount_amount);
+	   		$("#admin_discount_amount").text(admin_discount_amount);
 	   	}
 		
 
@@ -615,16 +631,20 @@ var amount;
 		   	
 		   	var cls = $row.find('td #plan_id').text();
 		   	
-		    if(cls==1||cls==2){
+		    if(cls==1||cls==2||cls==7){
 		    	
-		    	 enddate.setDate(enddate.getDate() + 90);
+		    	 enddate.setDate(enddate.getDate() + 91);
 		    	 
                }
 		    
-		    else if(cls==3||cls==4) {
+		    else if(cls==3||cls==4||cls==8) {
 		    	
-		    	 enddate.setDate(enddate.getDate() + 180);
+		    	 enddate.setDate(enddate.getDate() + 182);
 		    }
+			else if(cls==5||cls==6||cls==9)
+	{
+		enddate.setDate(enddate.getDate() + 365);
+}
 		    	
 
 		    var day1 = enddate.getDate();

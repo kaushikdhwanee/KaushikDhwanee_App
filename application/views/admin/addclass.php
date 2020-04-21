@@ -1,3 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <div class="content-wrapper">
 
    <div class="row">
@@ -8,7 +23,7 @@
 
 							<div class="panel-heading">
 
-								<h5 class="panel-title">ADD Class</h5>
+								<h5 class="panel-title">Add Class</h5>
 
 								<br>
 

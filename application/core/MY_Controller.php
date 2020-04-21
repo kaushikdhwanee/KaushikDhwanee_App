@@ -6,6 +6,8 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
         $this->load->model('payments_model');
         $this->load->model('payments_invoice_model');
+		 $this->load->model('summercamp_reg_model');
+		 $this->load->model('summercamp_payment_model');
         $this->load->library('m_pdf');
 	}
    
@@ -33,6 +35,67 @@ class MY_Controller extends CI_Controller {
                 $pdf = $this->m_pdf->load();
                 //generate the PDF!
                 $pdf->WriteHTML($html);
+	            
+                //offer it to user via browser download! (The PDF won't be saved on your server HDD)
+                 return $pdf->Output($pdfFilePath, "S");
+                 
+                    
+    }
+	public function file_download($payment_id)
+    { 
+                
+                //now pass the data//
+                 //$this->data['title']="MY PDF TITLE 1.";
+                 //$this->data['description']="";
+                 //$this->data['description']=$this->official_copies;
+                 //now pass the data //
+
+                //base_url("index/printreceipt/".$payment_id)
+                    $payments = $this->payments_model->getpaymentr($payment_id);
+                    $payment_invoice = $this->payments_invoice_model->getpayment_invoicer($payment_id);
+                    //echo $this->db->last_query();exit;
+                    $data = array('payments'=>$payments,"payment_invoice"=>$payment_invoice);
+                    $html=$this->load->view("admin/printreceiptrpdf.php",$data, true); //load the pdf_output.php by passing our data and get all data in $html varriable.
+             
+                //this the the PDF filename that user will get to download
+                $pdfFilePath ="mypdfName-".time()."-download.pdf";
+
+                
+                //actually, you can pass mPDF parameter on this load() function
+                $pdf = $this->m_pdf->load();
+                //generate the PDF!
+                $pdf->WriteHTML($html);
+		
+                //offer it to user via browser download! (The PDF won't be saved on your server HDD)
+                 return $pdf->Output($pdfFilePath, "S");
+                 
+                    
+    }
+	public function save_downloads($payment_id)
+    { 
+                
+                //now pass the data//
+                 //$this->data['title']="MY PDF TITLE 1.";
+                 //$this->data['description']="";
+                 //$this->data['description']=$this->official_copies;
+                 //now pass the data //
+
+                //base_url("index/printreceipt/".$payment_id)
+                    $payments = $this->summercamp_payment_model->getpayment($payment_id);
+                    //$payment_invoice = $this->payments_invoice_model->getpayment_invoice($payment_id);
+                    //echo $this->db->last_query();exit;
+                    $data = array('payments'=>$payments);
+                    $html=$this->load->view("admin/recieptpdf.php",$data, true); //load the pdf_output.php by passing our data and get all data in $html varriable.
+             
+                //this the the PDF filename that user will get to download
+                $pdfFilePath ="mypdfName-".time()."-download.pdf";
+
+                
+                //actually, you can pass mPDF parameter on this load() function
+                $pdf = $this->m_pdf->load();
+                //generate the PDF!
+                $pdf->WriteHTML($html);
+		// $pdf->shrink_tables_to_fit=1;
                 //offer it to user via browser download! (The PDF won't be saved on your server HDD)
                  return $pdf->Output($pdfFilePath, "S");
                  

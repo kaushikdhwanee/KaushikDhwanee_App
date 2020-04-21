@@ -1,3 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <!-- Main content -->
 
 <div class="content-wrapper">
@@ -84,7 +99,7 @@
                         
                           
                         
-                        <th>DOB</th>
+                        
 
                         <th>Mobile</th>
 
@@ -126,17 +141,7 @@
                        
 
 
-                        <td> 
-
-						   <div class="media-left">
-
-							<div class="text-muted text-size-small"><?=date("d-m-Y",strtotime($teacher_info['date_of_joining']))?></div>
-
-							
-
-						   </div> 
-
-						   </td>
+                        
 
                         <td> <div class="text-muted text-size-small"><?=$teacher_info['mobile']?></div> </td>
 

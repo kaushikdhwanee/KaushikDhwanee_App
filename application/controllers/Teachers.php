@@ -20,6 +20,8 @@ class Teachers extends CI_Controller {
 			$this->load->model("attendence_list_model");
 			$this->load->model("users_model");
 			$this->load->model("enroll_students_model");
+			$this->load->model("teachers_upload_model");
+			$this->load->model("student_attendence_model");
 			$this->load->library("sms");
 			
 		}
@@ -112,6 +114,7 @@ class Teachers extends CI_Controller {
  				$teacher_id = $this->input->post('teacher_id');
  				$date = $this->input->post('date');
  				$day_type= date("N",strtotime($date));
+				echo $teacher_id;
 
  				$batches = $this->batch_class_teachers_model->getclassesbyteacher($teacher_id, $day_type);
 
@@ -166,13 +169,15 @@ class Teachers extends CI_Controller {
  				$allclasses = array_column($batches, "class_name");
 
  				$classes = array_unique($allclasses);
+				//$batch_class_id =array();
 
  				foreach ($batches as $value) {
+					//$batch_class_id =  explode(',', $value['batch_class_id']);
 
  					$attendence = $this->enroll_students_batches_model->getstudentsbybatchwithattendence($teacher_id,$date,$value['batch_class_id']);
  					//echo $this->db->last_query();
  					//print_r($attendence);exit;
- 					if(empty($attendence))
+ 				if(empty($attendence))
  					{
  						$students[$value['batch_class_id']] = $this->enroll_students_batches_model->getstudentsbybatch($value['batch_class_id']);
  						//echo $this->db->last_query();exit;
@@ -216,7 +221,8 @@ class Teachers extends CI_Controller {
  			{
  				$member_id = $this->input->post('member_id');
 				$classes = $this->enroll_students_model->getuserenrollswithbatches($member_id);
-				
+				//echo $classes;
+			
 				//echo $this->db->last_query();exit;
 
  				if(!empty($classes))
@@ -238,21 +244,21 @@ class Teachers extends CI_Controller {
 			}
  			
         }
-
-        public function saveattendence_service()
+	public function enterattendence_service()
         {
         	$parameters = array("teacher_id","batch_class_id","enroll_student_id","date");
  			$_POST = json_decode (file_get_contents ("php://input"),true);
  			$this->form_validation->set_rules('teacher_id','teacher id','trim|required');
  			$this->form_validation->set_rules('batch_class_id','teacher id','trim|required');
  			$this->form_validation->set_rules('date','date','trim|required');
- 			$this->form_validation->set_rules('enroll_student_id','student_id','trim|required');
+ 			$this->form_validation->set_rules('enroll_student_id','enroll_student_id','trim|required');
  			$this->form_validation->set_rules('type','type','trim|required');
-
+             
  			
  			if($this->form_validation->run())
  			{
  				$teacher_id = $this->input->post('teacher_id');
+				
  				$date = $this->input->post('date');
  				$batch_class_id = $this->input->post('batch_class_id');
  				$enroll_student_id = $this->input->post('enroll_student_id');
@@ -278,13 +284,14 @@ class Teachers extends CI_Controller {
 	 					$userDetailss = array();
 	 					foreach ($enrollstudents as $enroll_student_id1) {
 							$userdetails1 = array('attendence_id'=>$attendence_id,
-												'enroll_student_id'=>$enroll_student_id1,
+												'enroll_id'=>$enroll_student_id1,
+												  'date'=>$date,
 												'type'=>$type
 												);
 							array_push($userDetailss, $userdetails1);
 	 					}
 	 					
-	 					$results =$this->attendence_list_model->save($userDetailss);
+	 					$results =$this->student_attendence_model->savebatch($userDetailss);
 
 	 				}
 	 				$result['success'] ="1";
@@ -292,19 +299,21 @@ class Teachers extends CI_Controller {
 
 				}else
 				{
-					$this->attendence_list_model->delete($attendence['id']);
+					//$this->attendence_list_model->delete($attendence['id']);
 
 					if(!empty($enrollstudents))
 	 				{
 	 					$userDetailss = array();
 	 					foreach ($enrollstudents as $enroll_student_id1) {
 							$userdetails1 = array('attendence_id'=>$attendence['id'],
-												'enroll_student_id'=>$enroll_student_id1
+												'enroll_id'=>$enroll_student_id1,
+												  'date'=>$date,
+												'type'=>$type
 												);
 							array_push($userDetailss, $userdetails1);
 	 					}
 	 					
-	 					$results =$this->attendence_list_model->save($userDetailss);
+	 					$results =$this->student_attendence_model->savebatch($userDetailss);
 
 	 				}
 	 				$result['success'] ="1";
@@ -318,6 +327,130 @@ class Teachers extends CI_Controller {
 			}
         }
 
+        public function saveattendence_service()
+        {
+        	$parameters = array("teacher_id","batch_class_id","enroll_student_id","type");
+ 		    $_POST = json_decode (file_get_contents ("php://input"),true);
+			
+			//echo $_POST;
+ 			$this->form_validation->set_rules('teacher_id','teacher id','trim|required');
+
+ 			//$this->form_validation->set_rules('batch_class_id','batch_class_id','trim|required');
+ 			$this->form_validation->set_rules('enroll_student_id','enroll_student_id','trim|required');
+ 		
+ 		if($this->form_validation->run())
+ 			
+ 			{
+ 				
+                $image = null;
+                $video = null;
+                $message = null;
+			$result = array();
+ 				$teacher_id = $this->input->post('teacher_id');
+ 				//echo $teacher_id;
+ 				//$batch_class_id = $this->input->post('batch_class_id');
+ 				//echo $batch_class_id;
+ 				$enroll_student_id = $this->input->post('enroll_student_id');
+ 				echo $enroll_student_id;
+ 				$enrollstudents = explode(",", $enroll_student_id);
+			//echo enrollstudents;
+ 				$message = $this->input->post('message');
+			/*if(empty($message){
+			$message=null;
+			}*/
+ 				$type = $this->input->post('type');
+			 
+
+ 	            $base=$_POST['image'];
+			header('Content-Type:application/json');
+			//echo $base;
+ 	           if($base != null){
+				   
+              $binary=base64_decode($base);
+              //  $path='uploads/teacher_upload/'.$image.'.jpg';
+                $image ='IMG'.strtotime('now').'.jpg';
+               $img = 'IMG'.strtotime('now');
+                $file = fopen('uploads/teacher_upload/'.$img.'.jpg', 'wb');
+                fwrite($file, $binary);
+                fclose($file);
+				  
+               // echo 'Image upload complete!!';
+               }
+              $vdould=$_POST['video'];
+			
+               if($vdould != null){
+            	$binary=base64_decode($vdould);
+                header('Content-Type: video/mp4; charset=utf-8');
+               // $path='uploads/teacher_upload/'.$video.'.webm';
+                $video ='VID'.strtotime('now').'.mp4';
+				   $vid = 'VID'.strtotime('now');
+                $file = fopen('uploads/teacher_upload/'.$vid.'.mp4', 'wb');
+                fwrite($file, $binary);
+                fclose($file);
+				 
+               // echo 'Image upload complete!!';
+            }
+	            
+ 				 $userDetails = array(
+								 'teacher_id'=>$teacher_id,
+								 'date'=>date('Y-m-d'),
+								 //'batch_class_id'=>$batch_class_id,
+								 'created_on'=>date("Y-m-d H:i:s"), 
+								 );
+ 							  
+	 				$attendence_id = $this->attendence_list_model->save($userDetails);
+	 				
+	 				if(!empty($enrollstudents))
+	 				{
+	 					$userDetailss = array();
+						//echo "abc";
+	 					foreach ($enrollstudents as $enroll_student_id1) {
+	 						//echo $enroll_student_id1. '<br>';
+
+							$userdetails1 = array(
+                                                'created_on'=>date('Y-m-d'),
+												'enroll_student_id'=>$enroll_student_id1,
+												'uploads'=>$image,
+												'videos'=>$video,
+												'message'=>$message,
+												
+												);
+
+							
+							array_push($userDetailss, $userdetails1);
+							
+	 					}
+	 					
+	 					 $results= $this->teachers_upload_model->save($userDetailss);
+						//echo $results;
+					}
+			            
+						if(!empty($attendence_id)){
+							
+						$result['results']= $results;
+						$result['success'] =1;
+				        echo json_encode($result);
+						
+						}
+						else
+			               {
+				      $result['success'] ="2";
+				      echo json_encode($result);
+			          }
+				}
+		
+		          else
+			               {
+				      $result['success'] ="5";
+				       echo json_encode($result); 
+						
+				  
+	 				
+ 			
+        }
+		}
+
+     
 
         public function getallusers_service()
         {

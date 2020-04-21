@@ -24,6 +24,7 @@ class Enroll_students_model extends CI_Model {
 		{
 			$this->db->where('status', $status);
 		}	
+		$this->db->order_by('enroll_students.member_id','ASC');	
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();			 
 	}
@@ -130,7 +131,65 @@ class Enroll_students_model extends CI_Model {
         return $query->row_array();	
 	}
 
-	public function getuserenrollswithbatches($member_id,$status)
+	public function enrollments($start_date,$end_date){
+     $this->db->select("enroll_students.*,user_family_members.name, users.mobile, branches.branch_name,classes.class_name");
+     	$this->db->join("users","users.id=enroll_students.user_id");
+     	$this->db->join("user_family_members","user_family_members.id = enroll_students.member_id");
+     	$this->db->join("branches","branches.id = users.branch_id");
+     	$this->db->join("classes","classes.id = enroll_students.class_id");
+     	$this->db->where('enroll_students.created_date >=', $start_date);
+     	$this->db->where('enroll_students.created_date <=', $end_date);
+     	$this->db->order_by('users.branch_id',"desc");
+     	$this->db->order_by('enroll_students.created_date', "desc");
+     	$query = $this->db->get(self::TABLE_NAME);	
+       	
+        return $query->result_array();	
+	}
+	public function enrollment($start_date,$end_date,$branch_id){
+     $this->db->select("enroll_students.*,user_family_members.name, users.mobile, branches.branch_name,classes.class_name");
+     	$this->db->join("users","users.id=enroll_students.user_id");
+     	$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+     	$this->db->join("branches","branches.id = users.branch_id");
+     	$this->db->join("classes","classes.id = enroll_students.class_id");
+     	$this->db->where('enroll_students.created_date >=', $start_date);
+     	$this->db->where('enroll_students.created_date <=', $end_date);
+     	$this->db->where_in('users.branch_id',$branch_id);
+     	$this->db->order_by('users.branch_id',"desc");
+     	$this->db->order_by('enroll_students.created_date', "desc");
+     	$query = $this->db->get(self::TABLE_NAME);	
+       	
+        return $query->result_array();	
+	}
+	public function todaysenrollment($date,$branch_id){
+     $this->db->select("enroll_students.*,user_family_members.name, users.mobile, branches.branch_name,classes.class_name");
+     	$this->db->join("users","users.id=enroll_students.user_id");
+     	$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+     	$this->db->join("branches","branches.id = users.branch_id");
+     	$this->db->join("classes","classes.id = enroll_students.class_id");
+     	$this->db->where('enroll_students.created_date', $date);
+     	$this->db->where_in('users.branch_id',$branch_id);
+     	$this->db->order_by('users.branch_id',"desc");
+     	$this->db->order_by('enroll_students.id', "desc");
+     	$query = $this->db->get(self::TABLE_NAME);	
+       	
+        return $query->result_array();	
+	}
+	public function todaysenrollments($date){
+     $this->db->select("enroll_students.*,user_family_members.name, users.mobile, branches.branch_name,classes.class_name");
+     	$this->db->join("users","users.id=enroll_students.user_id");
+     	$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+     	$this->db->join("branches","branches.id = users.branch_id");
+     	$this->db->join("classes","classes.id = enroll_students.class_id");
+     	$this->db->where('enroll_students.created_date', $date);
+     	$this->db->order_by('users.branch_id',"desc");
+     	$this->db->order_by('enroll_students.id',"desc");
+     	$query = $this->db->get(self::TABLE_NAME);	
+       	
+        return $query->result_array();	
+	}
+
+
+	public function getuserenrollswithbatches($member_id)
 	{	
 		$this->db->select("enroll_students.*,enroll_students.id as enroll_student_id, classes.class_name,batch_classes.type,batch_classes.start_time,batch_classes.end_time,batch_classes.id as batch_class_id");
 		$this->db->join("classes","classes.id=enroll_students.class_id");
@@ -140,10 +199,7 @@ class Enroll_students_model extends CI_Model {
 		$this->db->where('enroll_students.status', 1);
 		$this->db->group_by('enroll_students.id');
 
-		if(!empty($status))
-		{
-			$this->db->where('status',$status);
-		}	
+		
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();			 
 	}
@@ -174,14 +230,16 @@ class Enroll_students_model extends CI_Model {
 	}
 		
            
-     public function getenrollsbyactiveusers($date,$enddate)
+     public function getenrollsbyactiveusers($date)
 	{	
-        $this->db->select("enroll_students.*,users.branch_id");
+        $this->db->select("enroll_students.*,users.branch_id,users.mobile,classes.class_name,user_family_members.name");
         $this->db->join("users",'users.id=enroll_students.user_id');
+		 $this->db->join("classes",'classes.id=enroll_students.class_id');
+		$this->db->join("user_family_members",'user_family_members.id=enroll_students.member_id');
         $this->db->where("enroll_students.status", 1);
 		$this->db->where ("enroll_students.next_fees_due_date <=", $date);
 		//$this->db->where ("enroll_students.status", 1);
-        $this->db->where('enroll_students.id NOT IN(select enroll_student_id from invoice WHERE invoice.invoice_date <="'.$date.'" AND invoice.invoice_date >= "'.$enddate.'")');
+        $this->db->where('enroll_students.id NOT IN(select enroll_student_id from invoice WHERE invoice.invoice_date <="'.$date.'" AND invoice.paid_status = 1)');
 		//$query = $this->db->query("SELECT `enroll_students`.*, users.branch_id FROM `enroll_students` JOIN users on users.id=enroll_students.user_id  where `enroll_students`.`status` = 1 and 
 			//enroll_students.next_fee_due_date <= $date and enroll_students.id not in 
 				//(select enroll_student_id from invoice WHERE `invoice`.`invoice_date` <= $date AND `invoice`.`invoice_end_date`>= $enddate )");
@@ -287,6 +345,17 @@ class Enroll_students_model extends CI_Model {
         return $query->row_array();
 				 
 	}
+	public function getenrollbyid($id)
+	{	
+		$this->db->select("enroll_students.*,user_family_members.name,classes.class_name");
+		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		
+		$this->db->where('enroll_students.id', $id);
+		$query = $this->db->get(self::TABLE_NAME);		
+        return $query->row_array();
+				 
+	}
 	
 	public function update($userDetails, $category_id)
 	{
@@ -314,7 +383,7 @@ class Enroll_students_model extends CI_Model {
 	public function updatestatusbymember($userDetails, $category_id)
 	{
 		
-		$this->db->where($category_id);
+		$this->db->where('member_id', $category_id);
 		return $this->db->update(self::TABLE_NAME, $userDetails);				 
 	}
 
@@ -427,7 +496,9 @@ public function attendencebyuser($user_id){
 	}
 
 	public function getuserwithbranch($member_id)
-	{		
+		
+	{	
+		
 		$this->db->select("enroll_students.*, users.*, (classes.class_name) as class_name, enroll_students.id as enroll_student_id, attendence_list.attendence_id,");
 		$this->db->join("users","users.id=enroll_students.user_id","left");
 		
@@ -442,17 +513,20 @@ public function attendencebyuser($user_id){
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();			 
 	}
-public function getuserswithbranch($branch_id=null,$user_id=null,$status=null)
-	{		
-		$this->db->select("enroll_students.*,users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.type, (classes.class_name) as class_names, enroll_students.id as enroll_student_id,(enroll_students.member_id) as member_id,  branches.branch_name, user_family_members.user_status");
+public function getuserswithbranch($branch_id=null,$user_id=null,$class_id=null,$plan,$status=null,$sort_by,$sort_order)
+	{	
+	$sort_order = ($sort_order == 'ASC') ? 'ASC' : 'DESC';
+		
+        $sort_columns = array('enroll_student_id', 'end_date', 'class_names','start_date','total_sessions');
+        
+		$sort_by = (in_array($sort_by, $sort_columns)) ? $sort_by : 'enroll_student_id';
+		$this->db->select("enroll_students.*,users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.type, (classes.class_name) as class_names, enroll_students.id as enroll_student_id,(enroll_students.member_id) as member_id,  branches.branch_name,(enroll_students.status)as status");
 		$this->db->join("users","users.id=enroll_students.user_id","left");
 		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
 		//$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id","left");
 		//$this->db->join("attendence_list",'attendence_list.enroll_student_id=enroll_students.id');
 		$this->db->join("classes","classes.id=enroll_students.class_id","left");
 		$this->db->join("branches","branches.id=user_family_members.branch_id","left");
-
-
 
 		if(!empty($status))
 		{
@@ -466,14 +540,22 @@ public function getuserswithbranch($branch_id=null,$user_id=null,$status=null)
 		{
 			$this->db->where("user_family_members.id",$user_id);
 		}
+	if(!empty($class_id))
+		{
+			$this->db->where("enroll_students.class_id",$class_id);
+		}
+	if(!empty($plan))
+		{
+			$this->db->where("enroll_students.plan",$plan);
+		}
 		//$this->db->group_by("user_family_members.id");
-		$this->db->order_by("enroll_students.id","desc");
+		$this->db->order_by("$sort_by","$sort_order");
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();			 
 	}
 
      public function getusersbyenroll($id){
-     	$this->db->select("enroll_students.*, user_family_members.name, branches.branch_name,user_family_members.branch_id, classes.class_name,(plans.two_session_three_months) as plan1,(plans.three_session_three_months) as plan2,(plans.two_session_six_months) as plan3,(plans.three_session_six_months) as plan4");
+     	$this->db->select("enroll_students.*, user_family_members.name, branches.branch_name,user_family_members.branch_id, classes.class_name,(plans.two_session_three_months) as plan1,(plans.two_session_two_months) as plan2,(plans.two_session_six_months) as plan3,(plans.three_session_six_months) as plan4,(plans.two_session_one_year) as plan5,(plans.three_session_one_year) as plan6,(plans.one_session_three_months) as plan7,(plans.one_session_six_months) as plan8,(plans.one_session_one_year) as plan9");
      	$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
      	$this->db->join("branches", "branches.id=user_family_members.branch_id");
      	$this->db->join("classes", "classes.id=enroll_students.class_id");
@@ -483,6 +565,54 @@ public function getuserswithbranch($branch_id=null,$user_id=null,$status=null)
         return $query->row_array();
 
      }
-
+public function getenrollactive($date){
+		$this->db->select("enroll_students.*,users.mobile,classes.class_name,user_family_members.name");
+		$this->db->join("users","users.id=enroll_students.user_id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+		$this->db->where("enroll_students.status", 1);
+	    $this->db->where("enroll_students.end_date >",$date);
+		$this->db->where ("DATE_SUB(enroll_students.end_date, INTERVAL 15 DAY)<=", $date);
+		$this->db->where('enroll_students.id NOT IN(select enroll_student_id from invoice WHERE invoice.invoice_date <="'.$date.'" AND invoice.paid_status = 3)');
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();	
+	}
+	
+	public function upcomingpendingfees($branch_id=null,$date){
+		$this->db->select("enroll_students.*,users.mobile,classes.class_name,user_family_members.name,branches.branch_name,(invoice.id)as invoice_id");
+		$this->db->join("users","users.id=enroll_students.user_id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+		$this->db->join("branches","branches.id=user_family_members.branch_id");
+		$this->db->join("invoice","invoice.enroll_student_id=enroll_students.id and invoice.paid_status=3");
+		$this->db->where("enroll_students.status", 1);
+		if(!empty($branch_id))
+		{
+			$this->db->where("user_family_members.branch_id",$branch_id);
+		}
+		$this->db->where("DATEDIFF(enroll_students.end_date,' $date') >", 0);
+		$this->db->where("DATEDIFF(enroll_students.end_date, '$date') <=", 15);
+		
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();	
+	}
+	public function upcomingpendingfeessuper($date){
+		$this->db->select("enroll_students.*,users.mobile,classes.class_name,user_family_members.name,branches.branch_name,(invoice.id)as invoice_id");
+		$this->db->join("users","users.id=enroll_students.user_id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id");
+		$this->db->join("branches","branches.id=user_family_members.branch_id");
+		$this->db->join("invoice","invoice.enroll_student_id=enroll_students.id and invoice.paid_status=3");
+		$this->db->where("enroll_students.status", 1);
+		if(!empty($branch_id))
+		{
+			$this->db->where("user_family_members.branch_id",$branch_id);
+		}
+		$this->db->where("DATEDIFF(enroll_students.end_date,' $date') >", 0);
+		$this->db->where("DATEDIFF(enroll_students.end_date, '$date') <=", 15);
+		
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();	
+	}
 
 }

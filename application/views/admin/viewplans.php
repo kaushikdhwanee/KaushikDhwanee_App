@@ -1,3 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <!-- Main content -->
 
 <div class="content-wrapper">
@@ -83,7 +98,8 @@
 
                         <th>48 session (6 months)<br>2 session/week</th>
 
-                        <th>48 session (6 months)<br>3 session/week</th>
+                        <th>72 session (6 months)<br>3 session/week</th>
+						 <th>96 session (6 months)<br>2 session/week</th>
 
                         
 
@@ -117,6 +133,7 @@
                         <td> <div class="media-left"><?=$class_info['two_session_six_months']?></div></td>
 
                         <td> <div class="media-left"><?=$class_info['three_session_six_months']?></div></td>
+						 <td> <div class="media-left"><?=$class_info['two_session_one_year']?></div></td>
 
                         
 

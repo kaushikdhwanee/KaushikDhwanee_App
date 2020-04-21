@@ -20,7 +20,12 @@
 								<h5 class="panel-title"><a href="<?=base_url("admin/view_democlasses")?>">Pending Demo Requests: <?=$demos_count?></a></h5> 
 								<h5 class="panel-title"><a href="<?=base_url("admin/viewleaves")?>">Pending Leave Applications: <?=$leave_requests_count?></a> </h5>
 								<h5 class="panel-title"><a href="<?=base_url("admin/viewfeedbacks")?>">Pending Feedbacks: <?=$feedback_count?></a> </h5>
-								
+								<h5 class="panel-title"><a href="<?=base_url("admin/todayregistration")?>">Pending Enrollments:<?=$registration_count?></a> </h5>
+								<h5 class="panel-title"><a href="<?=base_url("admin/todaysenrollment")?>">Today's Enrollment: <?=$enrollment_count?></a> </h5>
+								<h5 class="panel-title"><a href="<?=base_url("admin/todaycollection")?>">Today's Fees Collection: <?=$total?></a> </h5>
+								<h5 class="panel-title"><a href="<?=base_url("admin/sumcamp_enroll")?>">Summer Camp Enrollments: <?=$sumcamp_enroll?></a> </h5>
+								<h5 class="panel-title"><a href="<?=base_url("admin/sumcamp_collection")?>">Summer Camp Collection: <?=$sumcamp_total?></a> </h5>
+								<h5 class="panel-title"><a href="<?=base_url("admin/upcomingpayments")?>">Upcoming Pending Payments: <?=$upcoming_pending_fees?></a> </h5>
 							
 							</div>
 

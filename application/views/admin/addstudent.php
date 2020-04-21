@@ -1,5 +1,27 @@
 <style>
+.loaderdiv{
+position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 ;opacity: 0.5;
+}
+.loader {
+  margin: 0px auto;
+    margin-top: 21%;
+}
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
 
+}
+.my-error-class {
+    color:#FF0000;  /* red */
+}
 .inline{
   display: inline-block;
 }
@@ -75,15 +97,15 @@
 
 						<div class="panel panel-flat">
 							<div class="panel-heading">
-								<h5 class="panel-title">Add Users</h5>
+								<h5 class="panel-title">Add Students</h5>
 							</div>
-							<div class="loader" style="display:none"></div>
+							<div class="loaderdiv" style="display:none" id="loading"><div class="loader" ></div></div>
 							<div class="col-md-12 product">
 							<div class="col-md-12">
 							    <div class="form-group col-md-6 ">
 							       
-								    <label class="radio inline">  <input type="radio" id="new-user" checked name="abc" class=" form-control user"><span>New user</span></label>
-    								 <label class="radio inline"> <input type="radio" id="new-user1" name="abc" class="form-control user"><span>Family Member</span></label>
+								    <label class="radio inline">  <input type="radio" id="new-user" checked name="abc" class=" form-control user"><span>New user</span>                                     </label>
+    								 <label class="radio inline"> <input type="radio" id="new-user1" name="abc" class="form-control user"><span>Family Member</span>                                          </label>
 								 
 								</div>
 								
@@ -94,11 +116,11 @@
 							  	<div class="form-group col-md-6">
 								 		<div class="input-group">
 								 <span class="input-group-addon"><i class="icon-calendar"></i></span>
-										<input type="text" class="form-control" id="datepicker1" class="datepicker1" name="registration_date" placeholder="Registration Date">
+								<input type="text" class="form-control" id="datepicker1" class="datepicker1" name="registration_date" readonly placeholder="Registration Date">
 								</div></div></div>
 								<div class="col-md-8">
 							    <div class="form-group  col-md-6">
-								 <input class="form-control" name="name" placeholder="Name Of The Student" type="text">
+								 <input class="form-control" name="name" style="text-transform:capitalize" placeholder="Name Of The Student" type="text" onkeypress="return ((event.charCode >= 65 && event.charCode <= 122 )||(event.charCode == 32))">
 								</div>
 								<div class="form-group  col-md-6">
 <!-- 								 <input class="form-control" name="age"  placeholder="Age" onkeypress="return event.charCode>=48 && event.charCode<=57" type="text">
@@ -120,7 +142,7 @@
 							
 								</div>
 						        <div class="form-group  col-md-6">
-								 <input class="form-control" name="email" placeholder="Email ID" type="text">
+								 <input class="form-control" name="email" placeholder="Email ID" type="email">
 								</div>
 								
 								<div class="form-group  col-md-6">
@@ -152,15 +174,36 @@
                               <div class="form-group  col-md-6">
 								 <input class="form-control" name="organization_name" placeholder="Name Of Your Organization" type="text">
 								</div>
-								<div class="form-group  col-md-12">
+								<div class="form-group  col-md-8">
 								<textarea rows="2" cols="5" class="form-control" name="address" placeholder="Address"></textarea>
 								</div>
-                                 <div class="form-group  col-md-12">
+									<div class="form-group  col-md-4">
                                  	
 								 <div class="control-label col-lg-4" id="demo" data-input-name="country" data-selected-country="IN" data-button-size="btn-lg" data-button-type="btn-warning" data-scrollable="true" data-scrollable-height="250px"></div>
                                  <input type="hidden" name="hiddeninput" id="hiddeninput" />
 
 								</div>
+									<div class="form-group  col-md-6">
+	
+									    <select  class="select form-control" name="class_id">
+						                            	<option value=""> Preffered Class</option>
+
+			                               <?php
+			                            	if(!empty($classes))
+			                            	{
+			                            		foreach ($classes as $cat_info) {
+			                            			?>
+			                            			 <option value="<?=$cat_info['class_name']?>"><?=$cat_info['class_name']?></option> 
+			                            	<?php	}
+			                            	}
+			                            	?>
+
+
+						                                
+						                            </select>
+							
+								</div> 
+                                 
 								</div>
 								<div class="col-md-4">
 								   <!-- <div class="profile-pic"><img src="images/admin.jpg"/></div> -->
@@ -277,7 +320,7 @@
 										
                                         <div class="col-lg-6">
 											
-                                              <input type="hidden" class="form-control" id="branch_id" name="branch_id" value="<?=@$branch['id']?>" placeholder="Amount"></input>
+                                              <input type="hidden" class="form-control" id="branch_id" name="branch_id" value="<?=@$branch['id']?>"placeholder="Amount">
                                             </div>  
                                           </div>
 
@@ -288,25 +331,54 @@
 											<span class="input-group-btn">	
 												<button class="btn btn-default btn-icon legitRipple" type="button">Rs</button>
 											</span>
-											<input type="text" class="form-control price" id="registration_amount" name="registration_amount" value="<?=@$branch['registration_amount']?>" placeholder="Amount">
+								<input type="text" class="form-control price" id="registration_amount" name="registration_amount" value="<?=@$branch['registration_amount']?>" placeholder="Amount">
 										</div>
 									</div>
 									</div>
 								  <?php endif; ?>
 								 	<div class="clearfix"></div>
 								 </div>
+								<div class="form-group col-md-12">
+								
+									<div class="col-lg-4">
+										<select name="payment_type" class="select box">
+
+									<option value="">Select Payment Mode</option> 
+
+										<option value="1">Cash</option> 
+
+		                                <option value="2">Credit Card/Debit Card</option> 
+
+		                                <option value="3">NEFT</option> 
+
+		                                <option value="4">Cheque</option>
+		                                <option value="5">Paytm</option>
+										<option value="6">GPay</option> 
+										<option value="7">Others</option> 
+											
+
+									</select>
+									</div>
+									<div class="clearfix"></div>
+								</div>
 								 	<div class="col-md-10 col-md-offset-2">
         <div class="sub-btn form-group col-md-4">
-		<button type="button" class="btn btn-primary active legitRipple center register">Registration Only</button>
+		<button type="button" class="btn btn-primary active legitRipple center register" data-loading-text="Loading...">Registration Only</button>
 		</div>         
 <div class="sub-btn form-group col-md-4">
-		<button type="button" class="btn btn-primary active legitRipple center enroll">Register and Enroll</button>
+		<button type="button" class="btn btn-primary active legitRipple center enroll" data-loading-text="Loading...">Register and Enroll</button>
 		</div>                                                                                   
 </div>
 </form>
 <form method="post" action="<?=base_url("admin/insertfamilymember")?>" id="family-memeber"  enctype="multipart/form-data" style="display:none">
-	<div class="col-md-12">
-		
+<div class="col-md-8">
+							  	<div class="form-group col-md-6">
+								 		<div class="input-group">
+								 <span class="input-group-addon"><i class="icon-calendar"></i></span>
+								<input type="text" class="form-control" id="datepicker2" class="datepicker1" name="registration_date"  placeholder="Registration Date">
+								</div></div></div>
+<div class="col-md-12">
+		                           <div class="col-md-12">
 								  <div class="form-group  col-md-4">
 	                                 <?php if($this->session->userdata("user_type")==1):?>
 									    <select  data-placeholder="Select Mobile" class="select box form-control" name="user_id">
@@ -356,10 +428,35 @@
                         <div id="dvPreview"></div>
                         
 								</div>
+	<div class="clearfix"></div>
+								 </div>
+	                             <div class="col-md-12">
+	                              <div class="form-group  col-md-4">
+	
+									    <select  class="select" name="class_id">
+						                            	<option value=""> Preffered Class</option>
+
+			                               <?php
+			                            	if(!empty($classes))
+			                            	{
+			                            		foreach ($classes as $cat_info) {
+			                            			?>
+			                            			 <option value="<?=$cat_info['class_name']?>"><?=$cat_info['class_name']?></option> 
+			                            	<?php	}
+			                            	}
+			                            	?>
+
+
+						                                
+						                            </select>
+							
+								</div> 
+									 <div class="clearfix"></div>
+								 </div>
 
 								<div class="col-md-12">
 								     <?php if($this->session->userdata("user_type")==1):?>
-								     <div class="form-group col-md-6">
+								     <div class="form-group col-md-4">
 								     
                                               <select  name="branch_id" id="branch_id"  class="selectbox form-control branch_id">
 
@@ -398,12 +495,12 @@
 										
                                         <div class="col-lg-6">
 											
-                                              <input type="hidden" class="form-control" id="branch_id" name="branch_id" value="<?=@$branch['id']?>" placeholder="Amount"></input>
+                                              <input type="hidden" class="form-control" id="branch_id" name="branch_id" value="<?=@$branch['id']?>" placeholder="Amount">
                                             </div>  
                                           </div>
 
                                           <div class=" form-group col-md-12">
-									   <label class="control-label col-lg-6"><p class="re-fonts">Registration Amount </p></label>
+									   <label class="control-label col-lg-4"><p class="re-fonts">Registration Amount </p></label>
 									<div class="col-lg-6">
 										<div class="input-group">
 											<span class="input-group-btn">	
@@ -416,18 +513,42 @@
 								  <?php endif; ?>
 								 	<div class="clearfix"></div>
 								 </div>
+	                             <div class="form-group col-md-12">
+								
+									<div class="col-lg-4">
+										<select name="payment_type" class="select box">
+
+									<option value="">Select Payment Mode</option> 
+
+										<option value="1">Cash</option> 
+
+		                                <option value="2">Credit Card/Debit Card</option> 
+
+		                                <option value="3">NEFT</option> 
+
+		                                <option value="4">Cheque</option>
+		                                <option value="5">Paytm</option>
+										<option value="6">GPay</option> 
+										<option value="7">Others</option> 
+											
+
+									</select>
+									</div>
+									<div class="clearfix"></div>
+								</div>
 								 <div class="col-md-10 col-md-offset-2">
 
 								<div class="sub-btn form-group col-md-4">
 		<!--<button type="button" class="btn btn-primary active legitRipple center add_family_member bbtn-loader" >Registration Only</button>-->
 		<button type="button" data-loading-text="Loading..."  class="btn btn-primary add_family_member">Registration Only</button>
 		</div>         
-<div class="sub-btn form-group col-md-4">
+        <div class="sub-btn form-group col-md-4">
 		<button type="button" class="btn btn-primary active legitRipple center enroll_family_member">Register and Enroll</button>
 		</div>                                                                                   
-</div>				
-								
+         </div>
 	</div>
+								
+	
 </form>
 							</div>
 							
@@ -444,20 +565,19 @@
 			</div>
 			<!-- /main content -->
 
-		</div>
 		
-	</div>
+		
+	
 
 	<!-- Footer -->
 	
-</body>
-</html>
+
 
 <script>
     $("button").click(function() {
     //var $btn = $(this);
     //$btn.button('loading');
-   $('#loading').show();
+   //$('#loading').show();
     
     $('#enrollstudent').submit();
 });
@@ -467,6 +587,7 @@
 });
     $('#demo').flagStrap();
 
+		
 
 </script>
 
@@ -495,19 +616,65 @@ $("#new-user1").click(function(){
 	var vendor_id ="";  
 	var profile_pic1 =[];	
 	vendor_id ="<?=$this->uri->segment('3')?>";
+	
+	$.validator.addMethod("email", 
+    function(value, element) {
+        return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+    }, 
+   
+);
+	
   $(document).ready(function(){
+	  
+	  $('#datepicker1').datepicker({
+        dateFormat: 'dd-mm-yy',
+       
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2012:c',
+
+        minDate: new Date(2012, 3 - 1, 01),
+		maxDate: new Date()
+        
+        
+    });
+	  $("#datepicker1").datepicker("setDate", new Date());
+	  $('#datepicker2').datepicker({
+        dateFormat: 'dd-mm-yy',
+       
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2012:c',
+
+        minDate: new Date(2012, 3 - 1, 01),
+		maxDate: new Date()
+        
+        
+    });
+	  $("#datepicker2").datepicker("setDate", new Date());
+	
   	//alert("hi");
      $("#student").validate({
+		 errorClass: "my-error-class",
       rules: {
         name: "required",
        	password:"required",
-		email: {"required":true,
-		email:true},
+		email: {
+                        required:  {
+                                depends:function(){
+                                    $(this).val($.trim($(this).val()));
+                                    return true;
+                                }   
+                            },
+                       email: true
+                    },
         date_of_birth:"required",
         password: "required",
         branch_id:"required",
         class_id: "required",
         registration_date:"required",
+		  whatsapp_number:{minlength: 10,
+        	maxlength: 10},
         mobile: {
         	required: true,
         	minlength: 10,
@@ -557,7 +724,7 @@ $("#new-user1").click(function(){
    	$(".register").click(function(){
    	if($("#student").valid())
    	{
-   		
+   		$('.loaderdiv').show();
         var data = new FormData();
 		var other_data = $("#student").serializeArray();
 
@@ -580,11 +747,11 @@ $("#new-user1").click(function(){
    			contentType: false, // The content type used when sending data to the server.
             cache: false, // To unable request pages to be cached
             processData:false,
-   			success: function(message){
+   			success:function(message){
    				var result = JSON.parse(message);
    				if(result.success==1){
 					alert("user registered successfully");
-					window.location = "<?=base_url('admin/printreceipt/')?>"+result.payment_id;
+					window.location = "<?=base_url('admin/printreceiptr/')?>"+result.payment_id;
    				}
    				else
    				{
@@ -600,7 +767,7 @@ $("#new-user1").click(function(){
   	$(".enroll").click(function(){
    	if($("#student").valid())
    	{
- 
+        $('.loaderdiv').show();
         var data = new FormData();
 		var other_data = $("#student").serializeArray();
 
@@ -627,7 +794,7 @@ $("#new-user1").click(function(){
    				//return false;
    				var result = JSON.parse(message);
    				//return false;
-   				if(result.success==1){
+   				if(result.success==2){
 					alert("user registered successfully");
 					window.location = "<?=base_url('admin/addenrollstudent/')?>"+result.user_id;
    				}
@@ -643,10 +810,13 @@ $("#new-user1").click(function(){
    	});
 
      $("#family-memeber").validate({
+		  errorClass: "my-error-class",
       rules: {
         name: "required",
        	user_id:"required",
 		branch_id:"required",
+		  class_id:"required",
+		  
 
       },
       messages:{
@@ -658,6 +828,7 @@ $("#new-user1").click(function(){
 	$(".add_family_member").click(function(){
    	if($("#family-memeber").valid())
    	{
+		$('.loaderdiv').show();
         var data = new FormData();
 		var other_data = $("#family-memeber").serializeArray();
 
@@ -672,7 +843,7 @@ $("#new-user1").click(function(){
 			data.append('image',value);
 			});
 	    }
-		//data.append('reg_type','1');
+		data.append('reg_type','1');
    		$.ajax({
    			type:"post",
    			url:"<?=base_url("admin/insertfamilymember")?>",
@@ -680,11 +851,11 @@ $("#new-user1").click(function(){
    			contentType: false, // The content type used when sending data to the server.
             cache: false, // To unable request pages to be cached
             processData:false,
-   			success: function(message){
+   			success:function(message){
    				var result = JSON.parse(message);
    				if(result.success==1){
 					alert("Family Member added successfully");
-					window.location = "<?=base_url('admin/printreceipt/')?>"+result.payment_id;
+					window.location = "<?=base_url('admin/printreceiptr/')?>"+result.payment_id;
 					
    				}
    				else
@@ -701,7 +872,7 @@ $("#new-user1").click(function(){
    	$(".enroll_family_member").click(function(){
    	if($("#family-memeber").valid())
    	{
- 
+       $('.loaderdiv').show();
         var data = new FormData();
 		var other_data = $("#family-memeber").serializeArray();
 
@@ -724,11 +895,11 @@ $("#new-user1").click(function(){
    			contentType: false, // The content type used when sending data to the server.
             cache: false, // To unable request pages to be cached
             processData:false,
-   			success: function(message){
+   			success:function(message){
    				//return false;
    				var result = JSON.parse(message);
    				//return false;
-   				if(result.success==1)
+   				if(result.success==2)
    				{
 					alert("Family Member added successfully");
 					window.location = "<?=base_url('admin/addenrollstudent/')?>"+result.user_id;

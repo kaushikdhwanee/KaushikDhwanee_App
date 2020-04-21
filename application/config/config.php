@@ -23,7 +23,7 @@ date_default_timezone_set('Asia/Kolkata');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:8080/kdhwanee_QA/';
+$config['base_url'] = 'http://beta.kaushikdhwanee.in/app/';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,7 @@ $config['base_url'] = 'http://localhost:8080/kdhwanee_QA/';
 |
 */
 $config['index_page'] = '';
+//$config['index_page'] = "index.php?";
 
 /*
 |--------------------------------------------------------------------------
@@ -381,9 +382,9 @@ $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = BASEPATH . 'cache/';
-$config['sess_match_ip'] = FALSE;
+$config['sess_match_ip'] = TRUE;
 $config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE;
+$config['sess_regenerate_destroy'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

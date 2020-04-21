@@ -59,10 +59,10 @@ class Users_model extends CI_Model {
 	
 	public function getusers($status=null)
 	{		
-		$this->db->select("users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type, group_concat(classes.class_name) as class_names, enroll_students.id as enroll_student_id,(enroll_students.total_sessions) as total_sessions");
+		$this->db->select("users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type");
 		$this->db->join("user_family_members","user_family_members.user_id=users.id");
-		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id");
-		$this->db->join("classes","classes.id=enroll_students.class_id");
+		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id","left");
+		//$this->db->join("classes","classes.id=enroll_students.class_id");
 		
 
 
@@ -70,11 +70,39 @@ class Users_model extends CI_Model {
 		{
 			$this->db->where("users.status",$status);
 		}
+		
 		$this->db->group_by("user_family_members.id");
 		$this->db->order_by("user_family_members.id","desc");
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();			 
 	}
+	public function getuserbybrnch($branch_id)
+	{		
+		$this->db->select("users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type");
+		$this->db->join("user_family_members","user_family_members.user_id=users.id");
+		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id","left");
+		
+		
+			$this->db->where("users.status",1);
+		
+		$this->db->where("users.branch_id",$branch_id);
+		$this->db->group_by("user_family_members.id");
+		$this->db->order_by("user_family_members.id","desc");
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();			 
+	}
+	/*public function getuserbybranch($branch_id)
+	{		
+		$this->db->select("users.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type");
+		$this->db->join("user_family_members","user_family_members.user_id=users.id");
+		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id","left");
+		$this->db->where("users.status",$status);
+		
+		$this->db->group_by("user_family_members.id");
+		$this->db->order_by("user_family_members.id","desc");
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();			 
+	}*/
 	public function getuserbeforeenddate($date,$status=null)
 	{		
 		$this->db->select("users.*,enroll_students.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type, group_concat(classes.class_name) as class_names, enroll_students.next_fees_due_date, enroll_students.id as enroll_student_id,(enroll_students.total_sessions) as total_sessions");
@@ -89,6 +117,26 @@ class Users_model extends CI_Model {
 		{
 			$this->db->where("users.status",$status);
 		}
+		$this->db->group_by("user_family_members.id");
+		$this->db->order_by("user_family_members.id","desc");
+		$query = $this->db->get(self::TABLE_NAME);			
+        return $query->result_array();			 
+	}
+	public function getuserbeforeenddatebybrnch($date,$branch_id)
+	{		
+		$this->db->select("users.*,enroll_students.*,user_family_members.name,user_family_members.profile_pic,user_family_members.id as member_id,user_family_members.type, group_concat(classes.class_name) as class_names, enroll_students.next_fees_due_date, enroll_students.id as enroll_student_id,(enroll_students.total_sessions) as total_sessions");
+		$this->db->join("user_family_members","user_family_members.user_id=users.id");
+		$this->db->join("enroll_students","enroll_students.member_id=user_family_members.id");
+		$this->db->join("classes","classes.id=enroll_students.class_id");
+		$this->db->where("enroll_students.next_fees_due_date >",$date);
+		
+
+
+		
+		
+			$this->db->where("users.status",1);
+		
+		$this->db->where("users.branch_id",$branch_id);
 		$this->db->group_by("user_family_members.id");
 		$this->db->order_by("user_family_members.id","desc");
 		$query = $this->db->get(self::TABLE_NAME);			
@@ -178,12 +226,12 @@ class Users_model extends CI_Model {
 		$query = $this->db->get(self::TABLE_NAME);	
         return $query->row_array();				 
 	}
-public function getusersbyuserclass($user_id,$class_id){
-	$this->db->select("users.*, user_family_members.name, branches.branch_name,user_family_members.id as member_id, user_family_members.profile_pic, user_family_members.branch_id, (enroll_students.id) as enroll_id, user_family_members.country,user_family_members.country");
+public function getusersbyuserclass($member_id,$class_id){
+	$this->db->select("users.*, user_family_members.name, branches.branch_name,user_family_members.id as member, user_family_members.profile_pic, user_family_members.branch_id, (enroll_students.id) as enroll_id, user_family_members.country");
 	$this->db->join("branches","branches.id=users.branch_id");
 	$this->db->join("enroll_students","enroll_students.user_id=users.id");
 	$this->db->join("user_family_members","user_family_members.user_id=users.id");
-		$this->db->where("users.id",$user_id);
+		$this->db->where("user_family_members.id",$member_id);
 		 $this->db->where("enroll_students.class_id",$class_id);
 		$query = $this->db->get(self::TABLE_NAME);	
         return $query->row_array();				 

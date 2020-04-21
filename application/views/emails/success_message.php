@@ -1,5 +1,5 @@
 <?php include("template/header.php");?>
-                  <table bgcolor="#f1f1f1" align="center" cellspacing="0" cellpadding="0" border="0" style="width:600px">
+                  <table bgcolor="#f1f1f1" align="center" cellspacing="0" cellpadding="0" border="0" style="width:100%;padding-top:15px;padding-left:10px;">
                      <tbody>
                         <tr>
                            <td colspan="2" >
@@ -8,11 +8,11 @@
                         </tr>
                         <tr>
                            <td>
-                              <table cellspacing="0" cellpadding="0" border="0" style="width:600px;">
+                              <table cellspacing="0" cellpadding="0" border="0" style="width:100%;">
                                  <tbody>
                                     <tr>
                                      <h2 class="hi">Hi <?=$username?>,</h2>
-                                    <h1 class="inter"> <?=$message?></h1>
+                                    <p class="inter"> <?=$message?></p>
                                      <?php
 
                                      if(isset($receipt) && !empty($receipt))
@@ -31,4 +31,3 @@
                      </tbody>
                   </table>
 <?php include("template/footer.php");?>
-                  

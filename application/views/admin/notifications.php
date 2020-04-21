@@ -1,8 +1,23 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <div class="content-wrapper">
 
    <div class="row">
 
-      <div class="col-lg-12">
+      <div class="col-md-16">
 
          <div class="panel panel-flat">
 

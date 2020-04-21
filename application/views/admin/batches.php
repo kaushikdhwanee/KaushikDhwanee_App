@@ -1,3 +1,18 @@
+<style>
+.panel-titles{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-headings{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <div class="content-wrapper">
 
    <div class="row">
@@ -6,9 +21,9 @@
 
          <div class="panel panel-flat">
 
-            <div class="panel-heading">
+            <div class="panel-headings">
 
-               <h5 class="panel-title">Add Batch</h5>
+               <h5 class="panel-titles">Add Batch</h5>
 
           
 

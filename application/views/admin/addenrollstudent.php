@@ -6,6 +6,23 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
   margin: 0px auto;
     margin-top: 21%;
 }
+	
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+.my-error-class {
+    color:#FF0000;  /* red */
+}
 </style>
 <div class="loaderdiv" style="display:none"><div class="loader" ></div></div>
 
@@ -36,6 +53,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 							     <div class="form-group">
 									<label class="control-label col-lg-4"><p class="sib-dis">Student Name</p></label>
 									  <div class="form-group  col-md-4">
+										  <input type="hidden" name="name" value="<?=$user_info['name']?>">
 									    <?=$user_info['name']?></div><!-- (<?=@$registration_amount?>) -->
 							
 								
@@ -58,7 +76,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 									<label class="control-label col-lg-4"><p class="sib-dis">Select Class</p></label>
 									 <div class="form-group  col-md-4">
 	
-									  <select data-placeholder="Select Class" class="select" name="class_id" id="class_id">
+									  <select data-placeholder="Select Class" class="select form-control" name="class_id" id="class_id">
 						                    <option value=""> Select class</option>
 
 			                               <?php
@@ -85,7 +103,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 									<label class="control-label col-lg-4"><p class="sib-dis">Select Plan</p></label>
 									 <div class="form-group  col-md-4">
 	
-									    <select data-placeholder="Select Category" class="select " id="plan_id" name="plan_id">
+									    <select data-placeholder="Select Plan" class="select" id="plan_id" name="plan_id">
 
 						                            	<option value="">Select Plan</option>
 
@@ -103,7 +121,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 									 <div class="form-group  col-md-4">
 	                                   <div class="input-group">
 										
-										<input type="number" class="form-control" id="number_of_class" class="number_of_class" name="number_of_class" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="" min="1" max="4">
+										<input type="number" class="form-control" id="number_of_class" class="number_of_class" name="number_of_class" onkeypress='return event.charCode >= 48                                           && event.charCode <= 57' placeholder="" min="1" max="7">
 									</div>
 									    <!--<select data-placeholder=" Number of classes" class="select " id="number_of_class" name="number_of_class">
 									    	<option value ='' id="default_value">Number of Sessions</option>
@@ -123,7 +141,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 									 <div class="form-group  col-md-4">
 	                                 <div class="input-group">
 										
-										<input type="text" class="form-control" id="total_sessions" class="session_id" name="total_sessions" placeholder="Total Sessions" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+										<input type="text" class="form-control" id="total_sessions" class="session_id" name="total_sessions" placeholder="Total Sessions" onkeypress='return                                           event.charCode >= 48 && event.charCode <= 57'>
 									</div>
 									    
 							
@@ -290,8 +308,8 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 								</div>
 
 								<div class="form-group">
-									<label class="control-label col-lg-4"><p class="sib-dis">Admin Discount <input type="radio" class="discount_type" name="discount_type" checked id="percent" value="1" >Percentage
-									<input type="radio" id="amount"  name="discount_type" class="discount_type"  value="2" >Amount</p><input type="text" class="form-control col-md-4" id="admin_discount" name="admin_discount"  onkeypress="return event.charCode>=48 && event.charCode<=57"  placeholder="Discount"></label>
+									<label class="control-label col-lg-4"><p class="sib-dis">Admin Discount <input type="radio" class="discount_type" name="discount_type" checked id="percent"                                     value="1" >Percentage
+									<input type="radio" id="amount"  name="discount_type" class="discount_type"  value="2" >Amount</p><input type="text" class="form-control col-md-4"                                              id="admin_discount" name="admin_discount"  onkeypress="return event.charCode>=48 && event.charCode<=57"  placeholder="Discount"></label>
 									<div class="col-lg-4">
 										<div class="input-group">
 											<span class="input-group-btn">	
@@ -334,7 +352,10 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 		                                <option value="3">NEFT</option> 
 
 		                                <option value="4">Cheque</option>
-		                                <option value="5">Paytm</option> 
+		                                <option value="5">Paytm</option>
+											<option value="6">GPay</option> 
+											<option value="7">Others</option> 
+											
 
 									</select>
 									</div>
@@ -358,7 +379,7 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 								<div class="clearfix"></div>
 								<div class="sub-btn form-group">
 								<input type="hidden" name="branch_id" id="branch_id" value="<?=$user_info['branch_id']?>">
-								<input type="hidden" name="user_id" id="user_id" value="<?=$user_info['id']?>">
+								<input type="hidden" name="user_id" id="user_id" value="<?=$user_info['user_id']?>">
 								<input type="hidden" name="member_id" id="" value="<?=$user_id?>">
 								<input type="hidden" name="sibling_discount" id="sibling_discount">
 
@@ -417,9 +438,12 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 $("button").click(function() {
     //var $btn = $(this);
     //$btn.button('loading');
-   $('.loaderdiv').show();
-    
+   
+    if($("#enrollstudent").valid()){
+	$('.loaderdiv').show();
+	}
     $('#enrollstudent').submit();
+		
 });
 
 var total_amount;
@@ -460,8 +484,34 @@ return time12;
 }
 	$(document).ready(function(){
 
+	  
+	  $('#datepicker1').datepicker({
+        dateFormat: 'dd-mm-yy',
+       
+        changeMonth: true,
+        changeYear: true,
+        
+
+        minDate: new Date(2012, 3 - 1, 01)
+		
+        
+        
+    });
+	  $('#datepicker2').datepicker({
+        dateFormat: 'dd-mm-yy',
+       
+        changeMonth: true,
+        changeYear: true,
+        
+
+        minDate: new Date(2012, 3 - 1, 01),
+		
+        
+        
+    });
 
 		$("#enrollstudent").validate({
+			 errorClass: "my-error-class",
       rules: {
 
         class_id:"required",
@@ -478,7 +528,7 @@ return time12;
         			},
         	},
         	},*/
-        plan_id: "required",
+        plan_id:"required",
       	start_date:"required",
         course_fee:"required",
          "selected_batches[]":{
@@ -490,6 +540,7 @@ return time12;
 
       },
     });
+		
 
 		   $("#class_id").change(function(){
 
@@ -508,11 +559,17 @@ return time12;
 			   			var resp = JSON.parse(message);
 			   			if(resp.success==1)
 			   			{
+			   				//$('#plan_id').append('<option value="7|'+resp.one_session_three_months+'"> 12 Session (3 months) '+resp.one_session_three_months+'</option>');
 			   				
-			   				$('#plan_id').append('<option value="1|'+resp.three_session_three_months+'"> 24 Session (3 months) '+resp.two_session_three_months+'</option>');
-			   				$('#plan_id').append('<option value="2|'+resp.three_session_three_months+'"> 36 Session (3 months) '+resp.three_session_three_months+'</option>');
+							
+			   				$('#plan_id').append('<option value="2|'+resp.two_session_two_months+'"> 16 Session (2 months) '+resp.two_session_two_months+'</option>');
+							$('#plan_id').append('<option value="1|'+resp.two_session_three_months+'"> 24 Session (3 months) '+resp.two_session_three_months+'</option>');
+							//$('#plan_id').append('<option value="8|'+resp.one_session_six_months+'"> 24 Session (6 months) '+resp.one_session_six_months+'</option>');
 			   				$('#plan_id').append('<option value="3|'+resp.two_session_six_months+'"> 48 Session (6 months)  '+resp.two_session_six_months+'</option>')
-			   				$('#plan_id').append('<option value="4|'+resp.three_session_six_months+'"> 72 Session (6 months) '+resp.three_session_six_months+'</option>');
+			   				//$('#plan_id').append('<option value="4|'+resp.three_session_six_months+'"> 72 Session (6 months) '+resp.three_session_six_months+'</option>');
+							//$('#plan_id').append('<option value="9|'+resp.one_session_one_year+'"> 48 Session (12 months) '+resp.one_session_one_year+'</option>');
+							$('#plan_id').append('<option value="5|'+resp.two_session_one_year+'"> 96 Session (12 months) '+resp.two_session_one_year+'</option>');
+							//$('#plan_id').append('<option value="6|'+resp.three_session_one_year+'"> 144 Session (12 months) '+resp.three_session_one_year+'</option>');
 			   				//$('#plan_id').append('<option value="5|'+resp.five_session+'"> 5 Session for Week '+resp.five_session+'</option>');
 			   					//$('#plan_id').append('<option value="6|'+resp.six_session+'"> 6 Session for Week '+resp.six_session+'</option>');
 			   					$(".select").selectpicker("refresh");
@@ -545,17 +602,40 @@ return time12;
 
 		    }
 		    else if (cls==2) {
-		    	sessions_per_week = '3';
-		    	 session = '36';
+		    	sessions_per_week = '2';
+		    	 session = '16';
 		    }
 		    else if(cls==3) {
 		    	sessions_per_week = '2';
 		    	 session = '48';
 		    }
-		    	else {
+		    	else if(cls==4) {
 		    	sessions_per_week = '3';
 		    	 session = '72';
 		    }
+			else if (cls==5){
+		    	sessions_per_week = '2';
+		    	 session = '96';
+		    }
+			else if(cls==6){
+				sessions_per_week = '3';
+		    	 session = '144';}
+			   
+			   else if(cls==7){
+				sessions_per_week = '1';
+		    	 session = '12';}
+			   
+			   else if(cls==8)
+			   {
+				sessions_per_week = '1';
+		    	 session = '24';}
+			   
+			   else if(cls==6){
+				sessions_per_week = '1';
+		    	 session = '48';}
+
+
+
 
 
 		    $.ajax({
@@ -665,8 +745,16 @@ return time12;
 
 			   	$(".selectday").each(function(){
 			   		selected_days.push($(this).val());
-			   	});
+			   	
 
+			   		var value = $(this).val();
+        if (value !== ''){ 
+			   		     
+        var ids = $(this).parent('select[name*="day"]').prop('id');
+        var options = $('select[name*="day"]:not(#' + ids + ') option[value=' + value + ']');
+        options.hide();
+        }
+			   	});
 			   	
 			   	$.ajax({
 			   		type:"post",
@@ -709,12 +797,18 @@ return time12;
 		   	    var str1 = str.split("|");	
 		   	
 		        var cls = str1[0];
-                if(cls ==1||cls==2){
+                if(cls ==1||cls==7){
 
-                dat.setDate(dat.getDate() + parseInt(90));
+                dat.setDate(dat.getDate() + parseInt(91));
             }
-            else{
-                dat.setDate(dat.getDate() + parseInt(180));
+				else if(cls ==2){
+                dat.setDate(dat.getDate() + parseInt(60));
+            }
+            else if(cls ==3||cls==4||cls==8){
+                dat.setDate(dat.getDate() + parseInt(183));
+            }
+			else if(cls ==5||cls==6||cls==9){
+                dat.setDate(dat.getDate() + parseInt(365));
             }
 			
             
@@ -831,7 +925,8 @@ return time12;
 			//alert(discount_type);
 			$("#admin_discount").val('');
 			$("#admin_discount_amount").val('');
-		    total_amount1 = parseFloat(registration_amount)+parseFloat(course_fee)<!---parseFloat(current_month_amount_discount)+parseFloat(feature_months_amount);-->
+		    total_amount1 = parseFloat(registration_amount)+parseFloat(course_fee);
+			//-parseFloat(current_month_amount_discount)+parseFloat(feature_months_amount);-->
 
 			$("#final_amount").val(Math.round(total_amount1));
 			

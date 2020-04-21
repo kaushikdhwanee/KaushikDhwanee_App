@@ -54,7 +54,7 @@ class Teachers_timings_model extends CI_Model {
 	public function delete($category_id)
 	{
 		
-		$this->db->where(("id=$category_id or teacher_id=$category_id"));
+		$this->db->where("id",$category_id);
 		return $this->db->delete(self::TABLE_NAME);				 
 	}
 }

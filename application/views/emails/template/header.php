@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml">
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
       <title>Email</title>
       <style>
@@ -104,16 +104,20 @@ color:#4b4b4b;
       </style>
    </head>
    <body>
-      <table bgcolor="#F4F4F4" align="center" cellspacing="0" cellpadding="0" border="0" style="width:610px;border-top:5px solid #ec0205;box-shadow:0px 0px 2px 5px rgba(0,0,0,0.1);">
+      <table bgcolor="#F4F4F4" align="center" cellspacing="0" cellpadding="0" border="0" style="width:100%;border-top:5px solid #ec0205;">
          <tbody>
             <tr>
-               <td width="600" >
-                  <table align="center" cellspacing="0" cellpadding="0" border="0" style="width:100%" >
+               <td>
+                  <table align="center" cellspacing="0" cellpadding="0" border="0" style="width:100%" bgcolor="#000000" >
                 
                      <tr>
-                        <td><a target="_blank" href="<?=base_url("base_url(index/index)")?>"><img border="0" alt="" src="<?=base_url("assets/admin/images/logo1.png")?>" height="50" style="padding:10px;margin-left:7px;"></a></td>
+                        <td class="text-center"><a target="_blank" href="http://kaushikdhwanee.in"><img border="0" alt="" src="<?=base_url("assets/admin/images/logo1.png")?>" height="40" style="padding:10px;"></a></td>
                         <td></td>
                      </tr>
-                     </tbody>
+                     
                   </table>
+				</td>
+			 </tr>
+			 <tbody>
+	   </table>
 				   <!-- <img src="<?=base_url("assets/images/bg.jpg")?>" style="width:600px ;margin:0px auto;display:block;"> -->

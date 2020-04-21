@@ -23,11 +23,12 @@ class Payments_invoice_model extends CI_Model {
 
 	public function getpayment_invoice($id)
 	{	
-		$this->db->select("payments_invoice.*,invoice.invoice_month,invoice.invoice_year,user_family_members.name,classes.class_name");
+		$this->db->select("payments_invoice.*,invoice.invoice_month,invoice.invoice_year,user_family_members.name,classes.class_name,attendence_list.attendence_id");
 		$this->db->join("invoice","invoice.id=payments_invoice.invoice_id","left");
 		$this->db->join("enroll_students","enroll_students.id=payments_invoice.enroll_student_id","left");
 		$this->db->join("user_family_members","user_family_members.id=enroll_students.member_id","left");
 		$this->db->join("classes","classes.id=enroll_students.class_id","left");
+		$this->db->join("attendence_list",'attendence_list.enroll_student_id=payments_invoice.enroll_student_id',"left");
 
 		
 		$this->db->where('payments_invoice.payment_id',$id);
@@ -35,7 +36,22 @@ class Payments_invoice_model extends CI_Model {
 		$query = $this->db->get(self::TABLE_NAME);		
         return $query->result_array();				 
 	}
+	public function getpayment_invoicer($id)
+	{	
+		$this->db->select("payments_invoice.*,invoice.invoice_month,invoice.invoice_year,user_family_members.name");
+		$this->db->join("invoice","invoice.id=payments_invoice.invoice_id","left");
+		$this->db->join("payments","payments.id=payments_invoice.payment_id");
+        // $this->db->join("enroll_students","enroll_students.id=payments_invoice.enroll_student_id");
+		$this->db->join("user_family_members","user_family_members.id=payments.member_id");
+		//$this->db->join("classes","classes.id=enroll_students.class_id","left");
+		
 
+		
+		$this->db->where('payments_invoice.payment_id',$id);
+		$this->db->group_by("payments_invoice.id");	
+		$query = $this->db->get(self::TABLE_NAME);		
+        return $query->result_array();				 
+	}
 	/*public function getenrollsbymember($member_id,$month,$year)
 	{	
 		$this->db->select("enroll_students.id,enroll_students.class_id,classes.class_name,invoice.*");

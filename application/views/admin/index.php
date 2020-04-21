@@ -10,7 +10,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Kaushik</title>
+	<title>Kaushik Dhwanee</title>
 
 
 
@@ -96,7 +96,7 @@
 
 						<div class="text-center">
 
-							<div class="icon-object border-slate-300 text-slate-300"><img src="<?=base_url("assets/admin/images/lg1.png")?>"/></div>
+							<div class="icon-object border-slate-300 text-slate-300"><img src="<?=base_url("assets/admin/images/lg1.gif")?>"/></div>
 
 							<h5 class="content-group">Login to your account <small class="display-block">Enter your credentials below</small></h5>
 

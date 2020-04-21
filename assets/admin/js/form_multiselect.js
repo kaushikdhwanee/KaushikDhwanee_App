@@ -18,7 +18,7 @@ $(function() {
     // Basic initialization
     $('.multiselect').multiselect({
         onChange: function() {
-            $.uniform.update();
+           // $.uniform.update();
         }
     });
 
@@ -656,6 +656,6 @@ $(function() {
     // ------------------------------
     
     // Styled checkboxes and radios
-    $(".styled, .multiselect-container input").uniform({ radioClass: 'choice'});
+   // $(".styled, .multiselect-container input").uniform({ radioClass: 'choice'});
 
 });

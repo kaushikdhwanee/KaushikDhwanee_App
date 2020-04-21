@@ -5,7 +5,7 @@
 
 						<div class="panel panel-flat">
 							<div class="panel-heading">
-								<h5 class="panel-title">Add Users</h5>
+								<h5 class="panel-title">Edit Users</h5>
 							</div>
 							<div class="loader" style="display:none"></div>
 							<div class="col-md-12 product">
@@ -38,7 +38,7 @@
 								</div>
 								
 								<div class="form-group  col-md-6">
-								 <input class="form-control" value="<?=$user_info['mobile']?>" readonly placeholder="Phone No" onkeypress="return event.charCode>=48 && event.charCode<=57" type="text">
+								 <input class="form-control" value="<?=$user_info['mobile']?>" name="mobile" placeholder="Phone No" onkeypress="return event.charCode>=48 && event.charCode<=57" type="text">
 								</div>
 								<div class="form-group  col-md-6">
 								 <input class="form-control" value="<?=$user_info['whatsapp_number']?>" name="whatsapp_number" placeholder="Whatsapp No" onkeypress="return event.charCode>=48 && event.charCode<=57" type="text">
@@ -138,7 +138,7 @@ $("#new-user1").click(function(){
         	required: true,
         	minlength: 10,
         	maxlength: 10,
-        	remote:{
+        	/*remote:{
         		url: "<?=base_url('admin/checkusermobile')?>",
         		type:"POST",
         		data:{
@@ -147,7 +147,7 @@ $("#new-user1").click(function(){
         				},
         			vendor_id: vendor_id	
         			},
-        	},
+        	},*/
         	},
       },
       messages:{

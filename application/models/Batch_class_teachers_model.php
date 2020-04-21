@@ -51,13 +51,15 @@ class Batch_class_teachers_model extends CI_Model {
 
 	public function getclassesbyteacher($teacher_id,$type)
 	{
-		$this->db->select("batch_classes.*,batch_classes.id as batch_class_id,classes.class_name, branches.branch_name");
+		$this->db->select("batch_classes.*,batch_classes.id as batch_class_id,classes.class_name, branches.branch_name,batches.class_id");
 		$this->db->join('batch_classes'," batch_classes.id=batch_class_teachers.batch_class_id  and type=$type ");
 		$this->db->join('batches',"batches.id=batch_classes.batch_id");
 		$this->db->join('classes',"classes.id=batches.class_id");
 		$this->db->join('branches',"branches.id=batches.branch_id");
+		
 
 		$this->db->where('batch_class_teachers.teacher_id', $teacher_id);
+		//$this->db->group_by('batches.class_id');
 		//$this->db->where('batches.branch_id', $branch_id);
 		$query = $this->db->get(self::TABLE_NAME);			
         return $query->result_array();	

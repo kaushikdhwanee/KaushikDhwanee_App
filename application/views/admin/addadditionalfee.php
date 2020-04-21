@@ -41,9 +41,30 @@
 
 											 <div class="clearfix"></div>
 
-				   	        
+				   	        <div class="form-group">
+									<label class="control-label col-lg-4"><p class="sib-dis">Select Payment mode </p></label>
 
-								
+									<div class="col-lg-4">
+										<select name="payment_type" class="select box">
+
+									<option value="">Select Payment</option> 
+
+										<option value="1">Cash</option> 
+
+		                                <option value="2">Credit Card/Debit Card</option> 
+
+		                                <option value="3">NEFT</option> 
+
+		                                <option value="4">Cheque</option>
+		                                <option value="5">Paytm</option>
+											<option value="6">GPay</option> 
+											<option value="7">Others</option> 
+											
+
+									</select>
+									</div>
+
+								</div>
 
 								<div class="sub-btn form-group">
 		<input type="hidden" name="enroll_student_id" value="<?=@$this->uri->segment(3)?>">								

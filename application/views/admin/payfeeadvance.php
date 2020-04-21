@@ -1,4 +1,11 @@
 <style>
+	.loaderdiv{
+position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 ;opacity: 0.5;
+}
+.loader {
+  margin: 0px auto;
+    margin-top: 21%;
+}
   .nav-tab li{
   display:inline-block;
    font-size:16px;
@@ -24,6 +31,7 @@
  color:#fff !important;
  }
 </style>
+<div class="loaderdiv" style="display:none"><div class="loader" ></div></div>
 
 <div class="content-wrapper">
    <div class="row">
@@ -164,7 +172,7 @@
 								<div class="clearfix"></div>
 								</div>
 								<div class="form-group">
-								<div class="change form-group col-lg-2" id="change_batch">Change Batch</div>
+								<!--<div class="change form-group col-lg-2" id="change_batch">Change Batch</div>-->
 									<div class="clearfix"></div>
 								</div>
 								<div class="selectdays"></div>
@@ -175,7 +183,7 @@
 											<span class="input-group-btn">	
 												<button class="btn btn-default btn-icon legitRipple" type="button">Rs</button>
 											</span>
-											<input type="text" class="form-control" id="total_amount" name="total_amount" value="" readonly placeholder="Amount">
+											<input type="text" class="form-control" id="total_amount" name="total_amount" value="" placeholder="Amount">
 											
 										</div>
 									</div>
@@ -228,6 +236,8 @@
 
 		                                <option value="4">Cheque</option>
 		                                <option value="5">Paytm</option> 
+										<option value="6">GPay</option> 
+										<option value="7">Others</option> 
 
 									</select>
 									</div>
@@ -252,7 +262,7 @@
 								<div class="sub-btn form-group">
 								 <input type="hidden" name="branch_id" id="branch_id" > 
 								 <input type="hidden" name="user_id" id="user_id" > 
-								 <!-- <input type="hidden" name="member_id" id="" >  -->
+								  <input type="hidden" name="mem_id" id="mem_id" value=""> 
 								<input type="hidden" name="sibling_discount" id="sibling_discount">
 								<input type="hidden" name="enroll_student_id" id="enroll_student_id">
 								<input type="hidden" name="price_per_month" id="price_per_month">
@@ -286,7 +296,7 @@
     $("button").click(function() {
     //var $btn = $(this);
     //$btn.button('loading');
-   $('#loading').show();
+  $('.loaderdiv').show();
     
     $('#enrollstudent').submit();
 });
@@ -313,6 +323,7 @@ var attendence=0;
 var sessions;
 var diff=0;
 var start_day;
+	var datediff;
 function fomartTimeShow(time24){
 var tmpArr = time24.split(':'), time12;
 if(+tmpArr[0] == 12) {
@@ -377,6 +388,7 @@ return time12;
 			$("#class_id").append('<option value="">select</option>');
 
 			var member_id = $(this).val();
+			$("#mem_id").val(member_id);
 			$.ajax({
 			   		type:"post",
 			   		url:"<?=base_url('admin/getclassesbymemberid')?>",
@@ -471,13 +483,29 @@ return time12;
                                 s = 24;
 							  }
 							  if (cls== 2){
-                                s = 36;
+                                s = 16;
 							  }
 							  if (cls== 3){
                                 s = 48;
 							  }
+							  
 							  if (cls== 4){
                                 s = 72;
+							  }
+							  if (cls== 5){
+                                s = 96;
+							  }
+							  if (cls== 6){
+                                s = 144;
+							  }
+						 if (cls== 7){
+                                s = 12;
+							  }
+						 if (cls== 8){
+                                s = 24;
+							  }
+						 if (cls== 9){
+                                s = 48;
 							  }
 
 							   diff = total_sessions - session_taken;
@@ -489,10 +517,15 @@ return time12;
 							  sessions=parseFloat(s)+parseFloat(diff);
 							  console.log(sessions);
                              $("#total_sessions").val(sessions);
+						 // $('#plan_id').append('<option value="7|'+resp.user.plan7+'"> 12 Session (3 months)</option>');
 							 $('#plan_id').append('<option value="1|'+resp.user.plan1+'"> 24 Session (3 months)</option>');
-			   				$('#plan_id').append('<option value="2|'+resp.user.plan2+'"> 36 Session (3 months)</option>');
+			   				$('#plan_id').append('<option value="2|'+resp.user.plan2+'"> 16 Session (2 months)</option>');
+						 // $('#plan_id').append('<option value="8|'+resp.user.plan8+'"> 24 Session (6 months)</option>');
 			   				$('#plan_id').append('<option value="3|'+resp.user.plan3+'"> 48 Session (6 months)</option>')
-			   				$('#plan_id').append('<option value="4|'+resp.user.plan4+'"> 72 Session (6 months) </option>');
+			   				//$('#plan_id').append('<option value="4|'+resp.user.plan4+'"> 72 Session (6 months) </option>');
+						 // $('#plan_id').append('<option value="9|'+resp.user.plan9+'"> 48 Session (12 months)</option>');
+							   $('#plan_id').append('<option value="5|'+resp.user.plan5+'"> 96 Session (12 months) </option>');
+							   //$('#plan_id').append('<option value="6|'+resp.user.plan6+'"> 144 Session (12 months) </option>');
 
 							   
 							   $("#plan_id option").each(function(){ 
@@ -511,15 +544,22 @@ return time12;
 
     
 
-    if(cls==1||cls==2){
+    if(cls==1||cls==2||cls==7){
     enddate.setDate(enddate.getDate() + 92);
 }
-else
+						 else if(cls==2)
+	{
+		enddate.setDate(enddate.getDate() + 61);
+}
+else if(cls==3||cls==4||cls==8)
 	{
 		enddate.setDate(enddate.getDate() + 183);
 }
+else {
+	enddate.setDate(enddate.getDate() + 365);
+}
 
-
+datediff= (enddate-newdate)/(1000 * 60 * 60 * 24);
 
     
     var day1 = enddate.getDate();
@@ -568,10 +608,11 @@ else
 			 var class_id = $("#class_id").val();
 			 var branch_id = $("#branch_id").val();
 			 var user_id =$("#user_id").val();
-			 var start_date=$("#datepicker").val();
-			 if (start_date != "" ) {
+			// var start_date=$("#datepicker").val();
+			 
 			  var dat = $("#datepicker").datepicker("getDate");
-		  }
+				  var enddate = new Date(start_date);
+		  
 			 var str = $("#plan_id").val();
 			 var str1 = str.split("|");
 			 course_fee = str1[1];
@@ -579,25 +620,49 @@ else
 		  if(cls==1){
 			  sessions_per_week = '2';
 			   sessions = 24 + parseFloat(diff);
-			   dat.setDate(dat.getDate() + parseInt(91));
+			   enddate.setDate(enddate.getDate() + parseInt(91));
 
 		  }
 		  else if (cls==2) {
-			  sessions_per_week = '3';
-			   sessions = 36 + parseFloat(diff);
-			   dat.setDate(dat.getDate() + parseInt(91));
+			  sessions_per_week = '2';
+			   sessions = 16 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(60));
 		  }
 		  else if(cls==3) {
 			  sessions_per_week = '2';
 			   sessions = 48 + parseFloat(diff);
-			   dat.setDate(dat.getDate() + parseInt(182));
+			   enddate.setDate(enddate.getDate() + parseInt(182));
 		  }
-			  else {
+		  else if(cls==4) {
 			  sessions_per_week = '3';
 			   sessions = 72 + parseFloat(diff);
-			   dat.setDate(dat.getDate() + parseInt(182));
+			   enddate.setDate(enddate.getDate() + parseInt(182));
 		  }
-
+		  else if(cls==5) {
+			  sessions_per_week = '2';
+			   sessions = 96 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(365));
+		  }
+			  else if(cls==6){
+			  sessions_per_week = '3';
+			   sessions = 144 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(365));
+		  }
+			   else if(cls==7){
+			  sessions_per_week = '1';
+			   sessions = 12 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(91));
+		  }
+			   else if(cls==8){
+			  sessions_per_week = '1';
+			   sessions = 24 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(182));
+		  }
+			   else if(cls==9){
+			  sessions_per_week = '1';
+			   sessions = 48 + parseFloat(diff);
+			   enddate.setDate(enddate.getDate() + parseInt(365));
+		  }
 
 		  $.ajax({
 				 type:"post",
@@ -619,14 +684,15 @@ else
 						 $("#total_sessions").val(sessions);
 						 $("#course_fee").val(parseFloat(course_fee));
 					     total_amount = parseFloat(course_fee).toFixed(2);
-					  $("#datepicker1").val($.datepicker.formatDate("dd-mm-yy", dat));
+					  $("#datepicker1").val($.datepicker.formatDate("dd-mm-yy", enddate));
 					  $("#total_amount").val(total_amount);
 					  $("#final_amount").val(total_amount);
 					  
 				  
 					  $(".select").selectpicker("refresh");
 					  
-
+                     var end= new Date(enddate);
+						 datediff= (end-newdate)/(1000 * 60 * 60 * 24);
 					 
 
 				 }
@@ -699,21 +765,17 @@ $.ajax({
 }); 
 $(document).on('change',"#datepicker",function(){
 		 	//alert("fffffffffff");
-		 	var start_date = $(this).val();
+		 	var startdate = $(this).val();
             //var offset = $("#selectoffset").val();
             if (start_date != "" ) {
                 var dat = $("#datepicker").datepicker("getDate");
                 var str = $("#plan_id").val();
 		   	    var str1 = str.split("|");	
-		   	
+		   	var enddate = new Date(start_date);
 		        var cls = str1[0];
-                if(cls ==1||cls==2){
-
-                dat.setDate(dat.getDate() + parseInt(91));
-            }
-            else{
-                dat.setDate(dat.getDate() + parseInt(182));
-            }
+               
+                dat.setDate(dat.getDate() + parseInt(datediff));
+           
 			
             $("#datepicker1").val($.datepicker.formatDate("dd-mm-yy", dat));
 		 	total_amount =parseFloat(course_fee);
@@ -772,7 +834,13 @@ $(document).on('change',"#datepicker",function(){
    		});    
 
 		
-
+		   $("#total_amount").change(function(){
+        course_fee = $("#total_amount").val()
+        total_amount = parseFloat(course_fee);
+			   				$("#total_amount").val(parseFloat(total_amount).toFixed(2));
+			   				$("#final_amount").val(Math.round(total_amount));
+			   				$(".select").selectpicker("refresh")
+			   			})
 
 		
 

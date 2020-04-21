@@ -33,6 +33,8 @@ class Users extends MY_Controller {
 			$this->load->model("feedback_model");
 			$this->load->model("leaves_model");
 			$this->load->model("notifications_model");
+			$this->load->model("attendence_list_model");
+			$this->load->model("teachers_upload_model");
 			$this->load->helper('paytm');
 			$this->load->library('sms');
 			$this->load->library('email');
@@ -296,7 +298,7 @@ class Users extends MY_Controller {
 
 						
 
-	            		/*$this->email->subject("Account confirmation mail");
+	            		$this->email->subject("Account confirmation mail");
 	                    $this->email->from('info@kaushikdhwanee.com', 'Kaushik dhwanee');
 	                    $buffer = $this->save_download($payment_id);
                 		$this->email->attach($buffer, 'attachment', 'print_receipt.pdf', 'application/pdf');
@@ -306,11 +308,11 @@ class Users extends MY_Controller {
 	                             'username'=>$name,
 	                            'amount'=>$final_amount,
 	                            'date'=>date("Y-m-d H:i"),
-	                             //'receipt'=>base_url("index/printreceipt/".$payment_id)
+	                             'receipt'=>base_url("index/printreceipt/".$payment_id)
 	                            );
 	            		$message1 = $this->load->view('emails/registration_payment',$data,true);
 	                    $this->email->message($message1);
-						$this->email->send();*/
+						$this->email->send();
 
 
 						$userDetails = array('branch_id'=> $branch_id,
@@ -514,7 +516,8 @@ class Users extends MY_Controller {
 				
 				$members = $this->user_family_members_model->getmembers($user_id);
 				$classeslist  = $this->classes_model->getclasses();
-				$sessions=$this->enroll_students_model->gettotalsession($user_id);
+				
+				//$sessions=$this->enroll_students_model->gettotalsession($user_id);
 
 				
 				//$attendence = $this->enroll_students_model->getuser($user_id);
@@ -526,12 +529,18 @@ class Users extends MY_Controller {
 					{
 						$results1= array();
 						foreach ($classes as $class_info) {
-							$results1[$class_info['class_id']]=$this->enroll_students_batches_model->getbatchclasses($class_info['id']);
+							$results1[$class_info['class_id']]=$this->enroll_students_batches_model->
+							getbatchclasses($class_info['id']);
+
+							
 						}
 						$results[$member_info['id']] = $results1;
+						
 					}
 
+                   
 				}
+
 				$students=$this->enroll_students_model->getenrolls($user_id);
 				if(!empty($students)){
 				foreach ($students as $student_info){
@@ -544,8 +553,8 @@ class Users extends MY_Controller {
 	        	//$results = $this->plans_model->getplan($branch_id,$class_id);
 	        	$results['classes'] =  $classeslist;
 	        	$results['members'] =  $members;
-				$results['sessions'] =$sessions;
-				$results['attendence']=$attendence;
+				//$results['sessions'] =$sessions;
+				//$results['attendence']=$attendence;
 				$results['students'] = $students;
 	        	$results['image_url'] = base_url("uploads/class_images");
 	        	$results['success'] = 1;
@@ -556,6 +565,32 @@ class Users extends MY_Controller {
 	        	echo json_encode($results);
 	        }
         }
+
+        public function get_teachers_note_service(){
+
+         $_POST = json_decode ( file_get_contents ( "php://input" ),true );
+			
+        	$this->form_validation->set_rules('user_id','user_id','trim|required');
+        	//$this->form_validation->set_rules('member_id','member_id','trim|required');
+
+			if($this->form_validation->run())
+			{
+				
+				$user_id = $this->input->post('user_id');
+				
+				$uploads = $this->teachers_upload_model->teacher_upload($user_id);
+				$results['uploads'] = $uploads;
+				$results['image_url'] = base_url("uploads/teacher_upload");
+				$results['success']=1;
+     	          echo json_encode($results);
+     }else
+	        {
+	        	$results['success']=2;
+	        	echo json_encode($results);
+	        }
+ }
+
+
 
         public function getpayments_due_service()
         {
@@ -600,9 +635,38 @@ class Users extends MY_Controller {
         	$user_id = $this->input->post('user_id');
 			$invoice = $this->invoice_model->getinvoicebyusers($user_id);
 			
-			//$enddate="";
 			if(!empty($invoice)){
+				foreach ($invoice as $info){
+					$id=$info['id'];
+					$tot_sess=$info['total_sessions'];
+					$date =array();
+						$attendence_date = $this->enroll_students_model->sessionenddate($id);
+						$counts=0;   
+						$enddate="";
+						if(!empty($attendence_date)){
+							$counts	= count($attendence_date);
+							$i=0;
+							foreach($attendence_date as $value){
+								$i++;
+			
+							  $date[$i] = $value['date'];
+								
+								
+								if($i==$value['total_sessions']){
+								break;
+								}
+								
+							}
 				
+							$enddate = $date[$i];
+				//$results1 = array();
+				$results1 =array(
+					'counts'=> $counts,
+					'enddate'=>$enddate
+				);
+				$results[$info['id']] = $results1;
+			}
+		}
 			    $results['invoice'] = $invoice;
 				$results['user_id'] = $user_id;
 				
@@ -710,7 +774,7 @@ class Users extends MY_Controller {
 								 'final_amount'=>$final_amount,
 								 'payment_type'=>5,
 								 'payment_through'=>$payment_through,
-								 'created_date'=>date("Y-m-d H:i:s"), 
+								 'created_date'=>date("Y-m-d "), 
 								 'user_id'=>$user_id
 								);
 				
@@ -809,7 +873,7 @@ class Users extends MY_Controller {
 
 		    	$isInserted = $this->online_transactions_model->save($response_data);
 		    	$user_info = $this->users_model->getuserinfo($user_id);
-/*
+
 				$email = $user_info['email'];
                 $this->email->subject("Payment Information");
                 $this->email->from('info@kaushikdhwanee.com', 'Kaushik dhwanee');
@@ -824,7 +888,7 @@ class Users extends MY_Controller {
                         );
         		$message1 = $this->load->view('emails/success_message',$data,true);
                 $this->email->message($message1);
-				$this->email->send();*/
+				$this->email->send();
 
 				$username = $user_info['name'];
 				$message = "Dear $username, Received fees Rs $ammounts. Thank you, Team KAUSHIKDHWANEE";
@@ -1508,7 +1572,7 @@ class Users extends MY_Controller {
 				{
 					$otp = rand(1000,9999);
 					//$otp = 1234;
- 					$message = "Kaushik dhwanee otp has $otp";
+ 					$message = "Kaushik dhwanee otp is $otp";
  					$response = $this->sms->sendsms($mobile,$message);
 					$result = $this->users_model->getuserinfo($user['id']);
 					if(!empty($gcm_id))

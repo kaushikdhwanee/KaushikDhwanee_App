@@ -6,7 +6,7 @@ function payment_type($status)
          echo "Cash";
          break;
       case 2:
-         echo "Credit Card/ Debit Card";
+         echo "Credit/Debit Card";
          break;
       case 3:
          echo "NEFT";//ready to dispatch
@@ -31,19 +31,13 @@ function payment_type($status)
 <tr>
 
 
-                        <td class="text-center"><h6 class="no-margin"><?=$i?> </h6></td>
+                        <td class="text-center"><p class="no-margin"><?=$i?> </p></td>
 
                         <td> <div class="media-left">
 
-													<div class=""><a href="#" class="text-default text-semibold"><?=date("d-m-Y",strtotime($result_info['created_date']))?></a></div>
+													<div class="" style="width:40px"><a href="#" class="text-default text-semibold"><?=date("d-m-Y",strtotime($result_info['created_date']))?></a></div>
 
-													<div class="text-muted text-size-smalls">
-
-														<span class="status-mark border-danger position-left"></span>
-
-													 <?=date("h:i A",strtotime($result_info['created_date']))?>
-
-													</div>
+													
 
 												
 

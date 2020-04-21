@@ -1,3 +1,24 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+	
+	.my-error-class {
+    color:#FF0000;  /* red */
+}
+
+</style>
+
 <?php 
 $days = array(
 			"1"=>'Monday',
@@ -17,7 +38,7 @@ $days = array(
 
 						<div class="panel panel-flat">
 							<div class="panel-heading">
-								<h5 class="panel-title">ADD Teacher</h5>
+								<h5 class="panel-title">Add Teacher</h5>
 								<br>
 
 							</div>
@@ -26,7 +47,7 @@ $days = array(
 							
 							  <div class="form-group  col-md-4">
 
-								 <input class="form-control" placeholder="Enter Teacher Name" name="teacher_name" type="text">
+								 <input class="form-control" style="text-transform:capitalize "placeholder="Enter Teacher Name" name="teacher_name" type="text" onkeypress="return ((event.charCode >= 65 && event.charCode <= 120 )||(event.charCode == 32))">
                               
 
 								</div>
@@ -34,7 +55,7 @@ $days = array(
 	
 								<div class="input-group">
                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                     <input type="text" class="form-control" id="datepicker" name="date_of_joining" placeholder="Date of Joining;">
+                     <input type="text" class=" form-control" id="datepicker1" class="datepicker1"name="date_of_joining"  placeholder="Date of Joining;">
                   </div>
 							
 								</div>
@@ -201,10 +222,82 @@ $days = array(
 	<!-- Footer -->
 <?php //include_once 'includes/footer.php'?>
 
+<script type="text/javascript">
+	var vendor_id ="";  	
+	vendor_id ="<?=$this->uri->segment('3')?>";
+	
+$.validator.addMethod("email", 
+    function(value, element) {
+        return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
+    },
+	);				  
+  $(document).ready(function(){
+  	$('#datepicker1').datepicker({
+        dateFormat: 'yy-mm-dd',
+       
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2012:c',
 
+        minDate: new Date(2012, 3 - 1, 01),
+		maxDate: new Date()
+		
+        
+        
+    });
+     $("#teacher").validate({
+		 errorClass: "my-error-class",
+      rules: {
+        teacher_name: "required",
+       	password:"required",
+		email: {"required":true,
+		email:true},
+        date_of_joining:"required",
+        password: "required",
+        mobile: {
+        	required: true,
+        	minlength: 10,
+        	maxlength: 10,
+        	remote:{
+        		url: "<?=base_url('admin/checkmobile')?>",
+        		type:"POST",
+        		data:{
+        			mobile:function(){
+        				return $("input[name=mobile]").val();
+        				},
+        			vendor_id: vendor_id	
+        			},
+        	},
+        	},
+        	whatsapp_number: {
+        	
+        	minlength: 10,
+        	maxlength: 10,
+        	
+        	},
+        	emergency_contact_number: {
+        	
+        	minlength: 10,
+        	maxlength: 10,
+        	
+        	},
+      },
+      messages:{
+      	mobile:{
+      		remote:"Aleready registered",
+      	}
+      }
+    });
+
+  
+   
+  });
+</script>
 
 <script>
 
+   
+);
 //$(document).ready(function(){
 	$(function() {
 	var count = 1;
@@ -293,72 +386,6 @@ $(function(){
 
 </script>
 
-<script type="text/javascript">
-	var vendor_id ="";  	
-	vendor_id ="<?=$this->uri->segment('3')?>";
-  $(document).ready(function(){
-  	
-     $("#teacher").validate({
-      rules: {
-        name: "required",
-       	password:"required",
-		email: {"required":true,
-		email:true},
-        date_of_joining:"required",
-        password: "required",
-        mobile: {
-        	required: true,
-        	minlength: 10,
-        	maxlength: 10,
-        	remote:{
-        		url: "<?=base_url('admin/checkmobile')?>",
-        		type:"POST",
-        		data:{
-        			mobile:function(){
-        				return $("input[name=mobile]").val();
-        				},
-        			vendor_id: vendor_id	
-        			},
-        	},
-        	},
-        	whatsapp_number: {
-        	
-        	minlength: 10,
-        	maxlength: 10,
-        	
-        	},
-        	emergency_contact_number: {
-        	
-        	minlength: 10,
-        	maxlength: 10,
-        	
-        	},
-      },
-      messages:{
-      	mobile:{
-      		remote:"Aleready registered",
-      	}
-      }
-    });
 
-  $(function() {
-
-    $( "#datepicker" ).datepicker({
-
-      changeMonth: true,
-
-      changeYear: true,
-
-	  dateFormat: "dd-mm-yy"
-
-	  
-
-    });
-
-  });
-
-   
-  });
-</script>
 </body>
 </html>

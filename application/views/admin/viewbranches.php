@@ -1,3 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <!-- <script type="text/javascript" src="js/widgets.min.js"></script>
 
 <script type="text/javascript" src="js/globalize.js"></script>

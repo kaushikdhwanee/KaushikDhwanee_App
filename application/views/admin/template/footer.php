@@ -1,3 +1,12 @@
+<style>
+  
+  .footer{
+    position: fixed;
+    
+    z-index: 2000 !important;
+  }
+</style>
+
 	<div class="navbar navbar-default navbar-fixed-bottom footer">
 
 		<ul class="nav navbar-nav visible-xs-block">
@@ -12,7 +21,7 @@
 
 			<div class="navbar-text">
 
-				&copy; 2017. <a href="<?=base_url()?>" class="navbar-link">Kaushikdhwanee.com </a> by <a href="" class="navbar-link" target="_blank">Khusaki</a>
+				&copy; 2019. <a href="<?=base_url()?>" class="navbar-link">Kaushikdhwanee.com </a> by <a href="" class="navbar-link" target="_blank">KaushikDhwanee</a>
 
 			</div>
 

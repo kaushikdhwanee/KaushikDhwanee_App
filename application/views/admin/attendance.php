@@ -1,3 +1,19 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
+
 <?php //include_once 'includes/header.php'?>
 
 <!-- <script type="text/javascript" src="js/widgets.min.js"></script>
@@ -19,6 +35,9 @@
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
   padding:12px 10px !important;
 }
+	.bottom{
+		margin-bottom:100px;
+	}
 </style>
 
 <div class="content-wrapper">
@@ -36,12 +55,12 @@
                <h5 class="panel-title">View Attendance</h5>
 
             </div>
-                     <form method="get">
+                     <form class="bottom" method="get">
                       <div class="col-md-12" >
 
-                      <div class=" col-md-3">
+                      <!--<div class=" col-md-3">
    
-                               <select data-placeholder="Type mobile or Name" class="select box" name="branch_id" >
+                               <select data-placeholder="Select Branch" class="select box" name="branch_id" >
 
                                                 <option value=""> Select branch</option> 
 
@@ -60,10 +79,10 @@
 
                                       </select>
                      
-                        </div>
+                        </div>-->
 
-                <div class=" col-md-3">
-   hv
+                <div class=" col-md-5">
+   
                                <select data-placeholder="Type mobile or Name" class="select box" name="user_id"  ><!-- id="mobile" -->
                                                 <option value=""> Select Mobile</option> 
 
@@ -73,7 +92,7 @@
                                           foreach ($all_users as $cat_info) 
                                           {
                                              ?>
-                                              <option value="<?=$cat_info['member_id']?>"<?=($this->input->get('user_id'))==$cat_info['member_id']?"selected":""?>><?=$cat_info['mobile']."(".$cat_info['name'].")"?></option> 
+                                              <option value="<?=$cat_info['member_id']?>"<?=($this->input->get('user_id'))==$cat_info['member_id']?"selected":""?>><?=$cat_info['mobile']." (".$cat_info['name'].")"?></option> 
                                      <?php   }
                                        }
                                        ?>
@@ -144,7 +163,7 @@
 /*echo "<pre>";
 print_r($users);exit;*/
 
-if(!empty($_GET['branch_id'])){
+//if(!empty($_GET['branch_id'])){
   if(!empty($users)){
 
                                  $i=1;
@@ -188,7 +207,8 @@ if(!empty($_GET['branch_id'])){
                                  }
                                 
 
-} ?>
+//} 
+?>
 
   
 

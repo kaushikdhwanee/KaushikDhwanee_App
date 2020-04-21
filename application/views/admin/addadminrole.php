@@ -1,4 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
 
+}
+</style>
 <div class="content-wrapper">
 
     <div class="row">
@@ -79,7 +93,7 @@
                     </div>
                     <div class="col-md-11">
 
-                                <div class="form-group  col-md-5">
+                                <!--<div class="form-group  col-md-5">
 
 								    <select name="city_id" class="select">
 
@@ -98,8 +112,8 @@
 						                            </select>
 
 								</div>
+                                 <div class="col-md-1"></div>-->
 
-                                 <div class="col-md-1"></div>
 								<div class="form-group  col-md-5">
 
 								                   <select name="branch_id" class="select">

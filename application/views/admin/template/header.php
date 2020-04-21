@@ -32,9 +32,14 @@
    <link href="<?=base_url("assets/admin/css/components.css")?>" rel="stylesheet" type="text/css">
 
    <link href="<?=base_url("assets/admin/css/colors.css")?>" rel="stylesheet" type="text/css">
-
+  
    <link href="<?=base_url("assets/admin/css/font-awesome.min.css")?>" rel="stylesheet" type="text/css">
    <link href="<?=base_url("assets/admin/css/flags.css")?>" rel="stylesheet" type="text/css">
+   <link href="<?=base_url("assets/admin/vendors/fullcalendar-3.10.0/fullcalendar.min.css")?>"/>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+   
+   
 
    
 
@@ -56,6 +61,9 @@
    <script type="text/javascript" src="<?=base_url("assets/admin/js/pace.min.js")?>"></script>
 
    <script type="text/javascript" src="<?=base_url("assets/admin/js/jquery.min.js")?>"></script>
+   <script type="text/javascript" src="<?=base_url("assets/admin/vendors/fullcalendar-3.10.0/lib/moment.min.js")?>"></script>
+	<script type="text/javascript" src="<?=base_url("assets/admin/vendors/fullcalendar-3.10.0/fullcalendar.min.js")?>"></script>
+   
     <script src="<?=base_url("assets/admin/js/jquery.geocomplete.js")?>"></script>
 
   <script type="text/javascript" src="<?=base_url("assets/admin/js/jquery.validate.js")?>"></script>
@@ -89,6 +97,7 @@
    <script type="text/javascript" src="<?=base_url("assets/admin/js/form_multiselect.js")?>"></script>
   <script type="text/javascript" src="<?=base_url("assets/admin/js/jgrowl.min.js")?>"></script> 
   <script type="text/javascript" src="<?=base_url("assets/admin/js/moment.min.js")?>"></script> 
+  	
   <script type="text/javascript" src="<?=base_url("assets/admin/js/daterangepicker.js")?>"></script>
   <script type="text/javascript" src="<?=base_url("assets/admin/js/anytime.min.js")?>"></script>
   <script type="text/javascript" src="<?=base_url("assets/admin/js/picker.js")?>"></script>
@@ -104,6 +113,8 @@
 <script type="text/javascript" src="<?=base_url("assets/admin/js/globalize.js")?>"></script>
 
 <script type="text/javascript" src="<?=base_url("assets/admin/js/jqueryui_forms.js")?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+
 
 
  <!-- <script src="http://localhost/jobssavvy/assets/admin/js/jquery.dataTables.js" type="text/javascript"></script>
@@ -129,7 +140,7 @@ left: 0px;
 position: fixed;
 display: block;
 opacity: 0.7;
-background-color: #fff;
+background-color: #000;
 z-index: 1000;
 text-align: center;
 }
@@ -141,16 +152,19 @@ top: 250px;
 margin:0px auto;
 z-index: 100;
 }
+.black1{
+   background-color: #000; !important
+}
 </style>
    </head>
 
    <body class="navbar-bottom navbar-top">
 
 
-    <div id="loading">
+    <!--<div id="loading">
     
     <img id="loading-image" src="<?=base_url("assets/admin/images/loading.gif")?>" alt="">
-</div>
+</div>-->
 
 
 
@@ -167,9 +181,9 @@ z-index: 100;
 
       <div class="navbar navbar-inverse bg-indigo navbar-fixed-top">
 
-         <div class="navbar-header">
+         <div class="navbar-header black1">
 
-            <a class="navbar-brand" href="index.php"><img src="<?=base_url("assets/admin/images/logo1.png")?>" alt=""></a>
+            <a class="navbar-brand " href="admin/index.php"><img src="<?=base_url("assets/admin/images/logo1.png")?>" alt=""></a>
 
             <ul class="nav navbar-nav visible-xs-block">
 
@@ -457,8 +471,29 @@ z-index: 100;
                         <li class="<?= in_array($this->uri->segment(2),array("addstudent","viewstudents"))? "active" : ""  ?>"><a href="<?=base_url("admin/addstudent")?>">Add Students</a></li>
 
                          <!--<li><a href="#">Enroll Students</a></li>--><?php //=base_url("admin/addenrollstudent")?>
+                   <li><a href="<?=base_url("admin/viewusers")?>">View Users</a></li>
+                   <li><a href="<?=base_url("admin/viewstudents")?>">View Student Profiles</a></li>
+                   
 
-						 <li><a href="<?=base_url("admin/viewstudents")?>">View Student Profiles</a></li>
+                     </ul>
+
+                    </li>
+					  <li>
+
+                     <a href="#"><i class="fa fa-users"></i><span>Summer camp</span></a>
+
+                      <ul>
+						  <li class="<?= in_array($this->uri->segment(2),array("viewstudent"))? "active" : ""  ?>"><a href="<?=base_url("admin/summercamp")?>">Add                           Students</a></li>
+                     <li><a href="<?=base_url("admin/viewcampstudents")?>">View Students</a></li>
+						  <li><a href="<?=base_url("admin/addlocation")?>">Add Location</a></li>
+						  <li><a href="<?=base_url("admin/viewlocation")?>">View Location</a></li>
+						  <li><a href="<?=base_url("admin/summerplan")?>">Add Plan</a></li>
+                          <li><a href="<?=base_url("admin/viewsummerplan")?>">View Plan</a></li>
+						  <li><a href="<?=base_url("admin/view_sumcamp_collection")?>">Summercamp Collection Report</a></li>
+                        
+						  
+						  
+                   
 
                      </ul>
 
@@ -468,20 +503,23 @@ z-index: 100;
 
                      <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i><span>Report</span></a>
 
-                      <!-- <ul>
+                       <ul>
 
-                        <li><a href="#">Collections</a></li>
+                        <li><a href="<?=base_url("admin/viewcollection")?>">Fees Collection Report</a></li>
 
-                        <li><a href="#">Batches Wise Student Report</a></li>
+                        <li><a href="<?=base_url("admin/viewenrollment")?>">Enrollments Report</a></li>
+						  
 
-            						 <li><a href="#">Classes Wise Report</a></li>
+            						 
 
-            						 <li><a href="#">Batches Wise Report</a></li>
-
-                     </ul> -->
+                     </ul> 
 
                     </li>
+					  <li><a href="<?=base_url("admin/whatsapplink")?>"><i class="fa fa-users"></i>Add Whatsapp Link</a></li>
+						  
                     <li><a href="<?=base_url("admin/attendance")?>"><i class="icon-home4"></i> <span>Attendance</span></a></li>
+                    <li><a href="<?=base_url("admin/eventcalender")?>"><i class="icon-home4"></i> <span>Event Calender</span></a></li>
+
 
 					
 

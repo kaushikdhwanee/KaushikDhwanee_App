@@ -64,7 +64,7 @@ class Notifications{
 
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-     
+            curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0); 
 
             // Disabling SSL Certificate support temporarly
 

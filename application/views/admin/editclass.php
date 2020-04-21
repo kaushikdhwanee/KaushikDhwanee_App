@@ -25,30 +25,29 @@
                  <h4><?=$user_info['name']?></h4>
                 </div>
                   <div class="clearfix"></div>
-              <?php if(!empty($classes)){
-                  foreach ($classes as $class_info) {?>
+              
                     <div>
 							<form method="post" action="<?=base_url("admin/updateenrollclass")?>" id="student" enctype="multipart/form-data" >
-							  <div class="col-md-12 border">
+							  <div class="col-md-12 ">
 							    
                 
 
                     <div class="form-group  col-md-3">
-                 <?=$class_info['class_name']?>                
+                 <?=$user_info['class_name']?>                
                  </div>
-                  <input type="hidden" name="enrolls" value="<?=$class_info['id']?>">
+                  <input type="hidden" name="enrolls" value="<?=$user_info['id']?>">
 								<div class="form-group  col-md-3">
                   <label >Start Date:</label><br>
                   <div class="input-group">
                  <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                    <input type="date" class="form-control" name="start_date" value="<?=$class_info['start_date']?>" placeholder="Start Date">
+                    <input type="date" class="form-control" name="start_date" value="<?=$user_info['start_date']?>" placeholder="Start Date">
                 </div>
                </div>
                  <div class="form-group  col-md-3">
                   <label >End Date:</label><br>
                   <div class="input-group ">
                  <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                    <input type="date" class="form-control col-md-2"   name="end_date" value="<?=$class_info['end_date']?>" placeholder="Start Date">
+                    <input type="date" class="form-control col-md-2"   name="end_date" value="<?=$user_info['end_date']?>" placeholder="Start Date">
                 </div>
                </div>
 						    
@@ -63,8 +62,7 @@
 
 </div>
 
-<?php }
- } ?>
+
 
 							</div>
 							

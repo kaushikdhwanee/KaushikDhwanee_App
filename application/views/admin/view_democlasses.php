@@ -1,3 +1,19 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+	
+</style>
 <?php
 function statusname($status)
 {
@@ -10,7 +26,7 @@ function statusname($status)
       break;
     
     case 3:
-      return "Demo Scheduled";
+      return "Scheduled";
       break;
     case 4:
       return "Converted";
@@ -31,7 +47,7 @@ function statusname($status)
 
    <div class="row">
 
-      <div class="col-lg-12">
+      <div class="col-lg-16">
 
      	<div class="panel panel-flat">
 
@@ -46,7 +62,7 @@ function statusname($status)
 							</div>
             <?php if($this->session->userdata("user_type")==1){?>
             <form method="get">
-                      <div class="col-md-12" >
+                      <div class="col-md-16" >
                      
                       <div class=" col-md-3">
    
@@ -84,7 +100,7 @@ function statusname($status)
 
             
 
-               <table class="table text-nowrap">
+               <table class="table text-nowrap display" style="width:100%">
 
                  
                   <thead>
@@ -101,7 +117,8 @@ function statusname($status)
 
                                  <th>Branch</th>
                                  
-                                 <th width="30%">Description</th> 
+                                 <th>Description</th>
+								  <th>Date</th>
 
                                  <th>Status</th>
 
@@ -127,7 +144,7 @@ function statusname($status)
 
                                <div class="media-left">
 
-                                       <div class=""><a href="#" class="text-default text-semibold"><?=$category_info['name']."(".$category_info['mobile'].")"?></a></div>
+                                       <div class=""><?=$category_info['name']."(".$category_info['mobile'].")"?></div>
 
                                     </div>
 
@@ -139,7 +156,7 @@ function statusname($status)
 
                                     <div class="media-left">
 
-                                       <div class=""><a href="#" class="text-default text-semibold"><?=$category_info['email']?></a></div>
+                                       <div class=""><?=$category_info['email']?></div>
 
                                     </div>
 
@@ -150,7 +167,7 @@ function statusname($status)
 
                                     <div class="media-left">
 
-                                       <div class=""><a href="#" class="text-default text-semibold"><?=$category_info['class_name']?></a></div>
+                                       <div class=""><?=$category_info['class_name']?></div>
 
                                     </div>
 
@@ -162,7 +179,7 @@ function statusname($status)
 
                                     <div class="media-left">
 
-                                       <div class=""><a href="#" class="text-default text-semibold"><?=$category_info['branch_name']?></a></div>
+                                       <div class=""><?=$category_info['branch_name']?></div>
 
                                     </div>
 
@@ -174,7 +191,19 @@ function statusname($status)
 
                                     <div class="media-left">
 
-                                       <div class=""><a href="#" class="text-default text-semibold"><?=$category_info['comments']?></a></div>
+                                       <div class=""><?=$category_info['comments']?></div>
+
+                                    </div>
+
+                                 </td>
+								  <td>
+
+                                 
+
+                                    <div class="media-left">
+
+                                       <div class="">
+										   <?=date('d-m-Y',strtotime($category_info['created_date']))?></div>
 
                                     </div>
 

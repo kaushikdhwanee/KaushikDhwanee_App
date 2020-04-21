@@ -77,11 +77,15 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 									 <div class="form-group  col-md-4">
 	
 									    <select data-placeholder="Select Category" class="select " id="plan_id" name="plan_id">
-
+                                   <!-- <option value="7|<?=$enroll_info['plan7']?>"<?php if($enroll_info['plan']==7) echo "SELECTED";?>> 12 Session (3 months) </option>-->
 						            <option value="1|<?=$enroll_info['plan1']?>"<?php if($enroll_info['plan']==1) echo "SELECTED";?>> 24 Session (3 months) </option>
-						            <option value="2|<?=$enroll_info['plan2']?>"<?php if($enroll_info['plan']==2) echo "SELECTED";?>> 36 Session (3 months) </option>
+						            <option value="2|<?=$enroll_info['plan2']?>"<?php if($enroll_info['plan']==2) echo "SELECTED";?>> 16 Session (2 months) </option>
+									<!--<option value="8|<?=$enroll_info['plan8']?>"<?php if($enroll_info['plan']==8) echo "SELECTED";?>> 24 Session (6 months) </option>-->
 						            <option value="3|<?=$enroll_info['plan3']?>"<?php if($enroll_info['plan']==3) echo "SELECTED";?>> 48 Session (6 months) </option>
-						            <option value="4|<?=$enroll_info['plan4']?>"<?php if($enroll_info['plan']==4) echo "SELECTED";?>> 72 Session (6 months) </option>
+									<!--<option value="4|<?=$enroll_info['plan4']?>"<?php if($enroll_info['plan']==4) echo "SELECTED";?>> 72 Session (6 months) </option>-->
+									<!--<option value="9|<?=$enroll_info['plan9']?>"<?php if($enroll_info['plan']==9) echo "SELECTED";?>> 48 Session (12 months) </option>-->
+									<option value="5|<?=$enroll_info['plan5']?>"<?php if($enroll_info['plan']==5) echo "SELECTED";?>> 96 Session (12 months) </option>
+									<!--<option value="6|<?=$enroll_info['plan5']?>"<?php if($enroll_info['plan']==6) echo "SELECTED";?>> 144 Session (12 months) </option>-->
 
 															                                
 						                            </select>
@@ -234,6 +238,8 @@ position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overf
 
 		                                <option value="4">Cheque</option>
 		                                <option value="5">Paytm</option> 
+											<option value="6">GPay</option>
+											<option value="7">Others</option>
 
 									</select>
 									</div>
@@ -427,12 +433,18 @@ var total_sessions=$("#total_sessions").val();
 
     
 
-    if(cls==1||cls==2){
+    if(cls==1||cls==7){
     enddate.setDate(enddate.getDate() + 92);
+}
+	else if(cls==2){
+    enddate.setDate(enddate.getDate() + 61);
+}
+else if(cls==3||cls==4||cls==8){
+    enddate.setDate(enddate.getDate() + 182);
 }
 else
 	{
-		enddate.setDate(enddate.getDate() + 182);
+		enddate.setDate(enddate.getDate() + 365);
 }
 
 
@@ -540,19 +552,44 @@ $(this).val(day);
 
 		    }
 		    else if (cls==2) {
-		    	sessions_per_week = '3';
-		    	 session = '36';
-		    	 dat.setDate(dat.getDate() + parseInt(90));
+		    	sessions_per_week = '2';
+		    	 session = '16';
+		    	 dat.setDate(dat.getDate() + parseInt(60));
 		    }
 		    else if(cls==3) {
 		    	sessions_per_week = '2';
 		    	 session = '48';
-		    	 dat.setDate(dat.getDate() + parseInt(180));
+		    	 dat.setDate(dat.getDate() + parseInt(182));
 		    }
-		    	else {
+			else if(cls==4) {
 		    	sessions_per_week = '3';
 		    	 session = '72';
-		    	 dat.setDate(dat.getDate() + parseInt(180));
+		    	 dat.setDate(dat.getDate() + parseInt(182));
+		    }
+			else if(cls==5) {
+		    	sessions_per_week = '2';
+		    	 session = '96';
+		    	 dat.setDate(dat.getDate() + parseInt(365));
+		    }
+		    	else if(cls==6){
+		    	sessions_per_week = '3';
+		    	 session = '144';
+		    	 dat.setDate(dat.getDate() + parseInt(365));
+		    }
+			   else if(cls==7){
+		    	sessions_per_week = '1';
+		    	 session = '12';
+		    	 dat.setDate(dat.getDate() + parseInt(91));
+		    }
+			   else if(cls==8){
+		    	sessions_per_week = '1';
+		    	 session = '24';
+		    	 dat.setDate(dat.getDate() + parseInt(182));
+		    }
+			   else if(cls==9){
+		    	sessions_per_week = '1';
+		    	 session = '48';
+		    	 dat.setDate(dat.getDate() + parseInt(365));
 		    }
 
 
@@ -708,13 +745,17 @@ $(this).val(day);
 		   	    var str1 = str.split("|");	
 		   	
 		        var cls = str1[0];
-                if(cls ==1||cls==2){
+                if(cls ==1||cls==2||cls==7){
 
                 dat.setDate(dat.getDate() + parseInt(92));
             }
-            else{
+            else if(cls ==3||cls==4||cls==8){
                 dat.setDate(dat.getDate() + parseInt(183));
             }
+			else if(cls ==5||cls==6||cls==9){
+                dat.setDate(dat.getDate() + parseInt(365));
+            }
+			
 			
             $("#datepicker1").val($.datepicker.formatDate("dd-mm-yy", dat));
 		 	//total_amount =parseFloat(course_fee);

@@ -53,6 +53,23 @@ tr.shown td.details-control {
   width: 150px;
   overflow:hidden 
 }
+	table th.sort_ASC:after {
+   font-size:10px;
+   color:green;
+	content: "▲";
+}
+table th.sort_DESC:after {
+   font-size:10px;
+   color:green;
+	content: "▼";
+}
+	.space{
+	padding-bottom:40px;
+	}
+	.box{
+	border:1px solid green;
+		padding-top:20px;
+	}
 </style>
 
 <div class="content-wrapper">
@@ -67,13 +84,14 @@ tr.shown td.details-control {
 
             <div class="panel-heading">
 
-               <h5 class="panel-title ">View Users</h5>
+               <h5 class="panel-title ">View Student Profile</h5>
 
             </div>
                      <form method="get">
-                      <div class="col-md-12" >
+						 <div class="col-md-10 col-md-offset-1">Filter By :</div>
+                      <div class="col-md-10 col-md-offset-1 box" >
                       <?php if($this->session->userdata("user_type")==1){?>
-                      <div class=" col-md-3">
+                      <div class=" col-md-2 space"style="margin-right:30px">
    
                                <select data-placeholder="select branch" class="select box" name="branch_id" >
 
@@ -97,15 +115,15 @@ tr.shown td.details-control {
                      
                         </div>
                          <?php }?>
-                <div class=" col-md-3">
+                <div class=" col-md-3 space" style="margin-right:30px">
    
                                <select data-placeholder="Type mobile or Name" class="select box" name="user_id"  ><!-- id="mobile" -->
                                                 <option value=""> Select Mobile</option> 
 
                                         <?php
-                                       if(!empty($users))
+                                       if(!empty($all_users))
                                        {
-                                          foreach ($users as $cat_info) 
+                                          foreach ($all_users as $cat_info) 
                                           {
                                              ?>
                                               <option value="<?=$cat_info['member_id']?>"<?=($this->input->get('user_id'))==$cat_info['member_id']?"selected":""?>><?=$cat_info['mobile']."(".$cat_info['name'].")"?></option> 
@@ -118,8 +136,45 @@ tr.shown td.details-control {
                                               </select>
                      
                         </div> 
+						  
+						  <div class="col-md-3 space"style="margin-right:30px">
 
-                <div class=" col-md-3">
+								                   <select  data-placeholder="Select Class" name="class_id"  id="class_id" class="select">
+
+						                            	 	<option value="">Select class</option>
+
+						                                <?php
+						                            	if(!empty($classes))
+						                            	{
+						                            		foreach ($classes as $cat_info) {
+						                            			?>
+						                            			 <option value="<?=$cat_info['id']?>"><?=$cat_info['class_name']?></option> 
+						                            	<?php	}
+						                            	}
+						                            	?>
+
+						                            </select>
+                                
+								</div>
+						  <div class=" col-md-2 space"style="margin-right:30px">
+					
+   
+                               <select  class="select" name="plan"  ><!-- id="mobile" -->
+                                                <option value=""> Select Plan</option> 
+
+                                        
+                                              <option value="1" <?=($this->input->get('plan'))==1?"selected":""?> >Three Months</option> 
+                                              <option value="3" <?=($this->input->get('plan'))==3?"selected":""?> >Six Months</option> 
+								              <option value="5" <?=($this->input->get('plan'))==5?"selected":""?> >One Year</option>
+                                     
+
+                                                  
+                                              </select>
+                     
+                        </div>      
+
+                <div class=" col-md-2 space"style="margin-right:30px">
+					
    
                                <select  class="select box" name="status"  ><!-- id="mobile" -->
                                                 <option value=""> Select Status</option> 
@@ -134,9 +189,9 @@ tr.shown td.details-control {
                      
                         </div>         
 
-                         <div class=" col-md-3">
+                         <div class=" col-md-2 space">
    
-                               <input  name="search"  type="submit" name="search" >
+							 <button type="submit" name="search"class="btn-primary">GO</button>
                      
                         </div>
 
@@ -154,35 +209,64 @@ tr.shown td.details-control {
 
                <table  id="example"  class="table text-nowrap display" style="width:100%">
 
-                  
+                  <thead>
 
                      <tr>
                        
-                        <td>S No</td>
-                        <th>Student ID</th>
-                         <th>Profile Pic</th>
+                        <th>S No</th>
+                        <th <?php echo($sort_by == 'enroll_student_id' ? 'class="sort_'.$sort_order.'"' : ''); ?>>
+						<?php
+                            echo anchor("admin/viewstudents/enroll_student_id/" .
+                                    (($sort_order == 'ASC' && $sort_by == 'enroll_student_id') ? 'DESC' : 'ASC'), 'ID');
+                        ?>
+					</th>
+                        
                          
-                        <td>User Name</td>
+                        <th>User Name</th>
 
-                        <td>Mobile</td>
+                        
 
-                        <td>Email ID</td>
+                        
 
-                         <td>User Type</td>
+                         
 
-                         <td>Branch</td>
+                         <th>Branch</th>
 
-                         <td>Activities</td>
-                         <th>Start Date</th>
+                         <th <?php echo($sort_by == 'class_names' ? 'class="sort_'.$sort_order.'"' : ''); ?>>
+						<?php
+                            echo anchor("admin/viewstudents/class_names/" .
+                                    (($sort_order == 'ASC' && $sort_by == 'class_names') ? 'DESC' : 'ASC'), 'Activities');
+                        ?>
+					</th>
+
+               <th <?php echo($sort_by == 'total_sessions' ? 'class="sort_'.$sort_order.'"' : ''); ?>>
+						<?php
+                            echo anchor("admin/viewstudents/total_sessions/" .
+                                    (($sort_order == 'ASC' && $sort_by == 'total_sessions') ? 'DESC' : 'ASC'), 'Sessions');
+                        ?>
+					</th>
+
+                         <th <?php echo($sort_by == 'start_date' ? 'class="sort_'.$sort_order.'"' : ''); ?>>
+						<?php
+                            echo anchor("admin/viewstudents/start_date/" .
+                                    (($sort_order == 'ASC' && $sort_by == 'start_date') ? 'DESC' : 'ASC'), 'Start Date');
+                        ?>
+					</th>
+
+                         <th <?php echo($sort_by == 'end_date' ? 'class="sort_'.$sort_order.'"' : ''); ?>>
+						<?php
+                            echo anchor("admin/viewstudents/end_date/" .
+                                    (($sort_order == 'ASC' && $sort_by == 'end_date') ? 'DESC' : 'ASC'), 'End Date');
+                        ?>
+					</th>
+
+                         <th>Status</th>
 
 
-                         <td>Status</td>
-
-
-                        <td>Action</td>
+                        <th>Action</th>
 
                      </tr>
-
+                  </thead>
                   
 
                   <tbody class="refar-price">
@@ -205,60 +289,21 @@ print_r($users);exit;*/
                       <input type="button" id="submit" class="details-control" >+</div>
                     </td>-->
 
-                        <td><div class=" text-muted text-size-small"><?=$i?></h6></div></td>
+                        <td><div class=" text-muted text-size-small"><?=$i?></div></td>
                         <td> <div class=" text-muted text-size-small "><?=$branch_info['enroll_student_id']?></div> </td>
-                     <td>
-
-                    <div class="media-left media-middle">
-
-                                       <a href="#"><img src="<?=base_url("uploads/user_images/".$branch_info['profile_pic'])?>" class="img-circle img-xs" alt=""></a>
-
-                     </div>
-
-                           
-
-                        </td> 
+                     
                        
-                        <td> <div class=" text-muted text-size-small"><?=$branch_info['name']?></div> </td>
+                        <td> <div class=" text-muted text-size-small"><?=$branch_info['name']?></div> 
+						      <input type="hidden" id="member_id" name="member_id" value="<?=$branch_info['member_id']?>">
+						 </td>
 
                       
 
-                     <td> 
-
-                     <div class="media-left">
-
-                     <div class="text-muted text-size-small "><?=$branch_info['mobile']?></div>
-                     <input type="hidden" id="member_id" name="member_id" value="<?=$branch_info['member_id']?>"></div>
+                     
 
                      
 
-                     </div> 
-
-                     </td>
-
-                      <td> 
-
-                     <div class="media-left">
-
-                     <div class="text-muted text-size-small col-md-3"><?=$branch_info['email']?></div>
-
-                     
-
-                     </div> 
-
-                     </td>
-
-                       <td> 
-
-                     <div class="media-left">
-
-                     <div class="text-muted text-size-small"><?=($branch_info['type']==1?"Primary":"Secondary")?></div>
-
-                     
-
-                     </div> 
-
-                     </td> 
+                      
 
                      <td> 
 
@@ -283,11 +328,33 @@ print_r($users);exit;*/
                      </div> 
 
                      </td>
+						 <td> 
+
+                     <div class="media-left">
+
+                     <div class="text-muted text-size-small col-md-3"><?=$branch_info['total_sessions']?></div>
+
+                     
+
+                     </div> 
+
+                     </td>			
                      <td> 
 
                      <div class="media-left">
 
-                     <div class="text-muted text-size-small"><?=$branch_info['start_date']?></div>
+                     <div class="text-muted text-size-small"><?=date('d-m-Y',strtotime($branch_info['start_date']))?></div>
+
+                     
+
+                     </div> 
+
+                     </td>
+									 <td> 
+
+                     <div class="media-left">
+
+                     <div class="text-muted text-size-small"><?=date('d-m-Y',strtotime($branch_info['end_date']))?></div>
 
                      
 
@@ -298,7 +365,7 @@ print_r($users);exit;*/
 
                      <div class="media-left">
 
-                     <div class="text-muted text-size-small"><?=$branch_info['user_status']==1?"Active":"In Active"?></div>
+                     <div class="text-muted text-size-small"><?=$branch_info['status']==1?"Active":"In Active"?></div>
 
                      
 
@@ -317,16 +384,17 @@ print_r($users);exit;*/
 
                                  <ul class="dropdown-menu dropdown-menu-right">
 
-                                    <li><a href="<?=base_url("admin/addenroll/".$branch_info['member_id'])?>"> add New Class</a></li>
+                                   <!-- <li><a href="<?=base_url("admin/addenroll/".$branch_info['member_id'])?>"> add New Class</a></li>-->
 
-                                    <li><a href="<?=$branch_info['type']==1?base_url("admin/editstudent/".$branch_info['member_id']):base_url("admin/editfamilymember/".$branch_info['member_id'])?>"> Edit</a></li>
+                                    <!--<li><a href="<?=$branch_info['type']==1?base_url("admin/editstudent/".$branch_info['member_id']):base_url("admin/editfamilymember/".$branch_info['member_id'])?>"> Edit</a></li>-->
                                     
                                      <li><a href="<?=base_url("admin/addadditionalfee/".$branch_info['enroll_student_id'])?>"> add additional fee</a></li>
-                                     <!--<li><a href="<?=base_url("admin/editclassenroll/".$branch_info['member_id'])?>" > Edit class</a></li>-->
+                                     <li><a href="<?=base_url("admin/editclassenroll/".$branch_info['enroll_student_id'])?>" > Edit class</a></li>
 
                                  <li><a href="<?=base_url("admin/editclassstatus/".$branch_info['member_id'])?>" > Edit class Status</a></li>
+									 <li><a href="<?=base_url("admin/enterattendence/".$branch_info['enroll_student_id'])?>" > Enter Attendence</a></li>
 
-                                  <li><a  href="<?=base_url("admin/updatestudentstatus/".$branch_info['member_id']."/".$branch_info['user_status'])?>" > <?=$branch_info['user_status']==2? "Activate":"DeActivate"?> Student</a></li>
+                                 <!-- <li><a  href="<?=base_url("admin/updatestudentstatus/".$branch_info['member_id']."/".$branch_info['user_status'])?>" ><?=$branch_info['user_status']==2? "Activate":"DeActivate"?> Student</a></li>-->
 
 
                                  </ul>
@@ -403,75 +471,7 @@ print_r($users);exit;*/
   var enroll=[];
   var member_id;
   var x=$('tr#rows').length;
-/*$('tr#rows').each(function(i, row){
 
-var $row = $(row);
- member_id = $row.find('td #member_id').val();
-if(member_id!="")
-        {
-          
-        $.ajax({
-            type:"post",
-            url:"<?=base_url('admin/viewstudentsbymember')?>",
-            data:{member_id:member_id},
-            success: function(message){
-              var resp = JSON.parse(message);
-              if(resp.success==1)
-              { 
-                
-              $.each(resp.enrolls, function(index,value){
-                
-        
-                
-             
-              $row.after('<tr child"><td <div class="studentid">'+value.attendence_id+'</div></td><td class="col-md-4">'
-                +value.class_name+'</td><td class="col-md-4">'
-                +value.original_start_date+'</td><td>'
-                +value.start_date+'</td><td>'
-                +value.end_date+'</td><td>'
-                +value.total_sessions+'</td></tr>')
-
-                     
-                        
-
-        
-            })
-                
-    
-        
-      
-        
-        
-   
-  
-}
-          }
-        });
-      }
-      })
-
-
-/*$(document).ready(function() {
-    
-
-$('#example tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-
-        var row = table.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(row.data()) ).show();
-            tr.addClass('shown');
-        }
-    } );
-
-});*/
 </script>
 
 <script type="text/javascript">

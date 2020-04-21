@@ -1,3 +1,18 @@
+<style>
+.panel-title{
+  background-color: lightgrey;
+  margin:0;
+  padding-left: 15px;
+  font-style: italic;
+  font-weight: bold;
+	}	
+	.panel-heading{
+  margin: 0;
+  padding:0;
+  padding-bottom: 50px;
+
+}
+</style>
 <?php
 //print_r($classes);exit;
 ?>
@@ -75,21 +90,21 @@
                                 
 								<div class="form-group  col-md-6">
 								<label>2 sessions / week (3 months)</label>
-								 <input class="form-control" name="two_session_3months" id="two_session_3months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_three_months']?>" placeholder="Price per Month" type="text">
+								 <input class="form-control" name="two_session_3months" id="two_session_3months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_three_months']?>" placeholder="Price for three Month" type="text">
 
 								</div>
 
 								<div class="form-group  col-md-6">
 								<label>2 session / week (6 months)</label>
 
-								 <input class="form-control" name="two_session_6months" id="two_session_6months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_six_months']?>" placeholder="Price per Month" type="text">
+								 <input class="form-control" name="two_session_6months" id="two_session_6months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_six_months']?>" placeholder="Price for three Month" type="text">
 
 								</div>
 
 								<div class="form-group  col-md-6">
-								<label>3 session / week (3 months)</label>
+								<label>2 session / week (2 months)</label>
 
-								 <input class="form-control" name="three_session_3months" id="three_session_3months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['three_session_three_months']?>" placeholder="Price per Month" type="text">
+								 <input class="form-control" name="two_session_2months" id="three_session_3months" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_two_months']?>" placeholder="Price for six Month" type="text">
 
 								</div>
 
@@ -97,9 +112,24 @@
 
 								<label>3 session / week (6 months)</label>
 
-								 <input class="form-control" name="three_session_6months" id="three_session_6months"onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['three_session_six_months']?>" placeholder="Price per Month" type="text">
+								 <input class="form-control" name="three_session_6months" id="three_session_6months"onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['three_session_six_months']?>" placeholder="Price for six Month" type="text">
 
 								</div>
+								<div class="form-group  col-md-6">
+
+								<label>2 session / week (12 months)</label>
+
+								 <input class="form-control" name="two_session_12months" id="two_session_12months"onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['two_session_one_year']?>" placeholder="Price for twelve Month" type="text">
+
+								</div>
+								<div class="form-group  col-md-6">
+
+                                <label>3 session / week (12 months)</label>
+
+                                <input class="form-control" name="three_session_12months" id="three_session_12months"onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="<?=@$plan_info['three_session_six_months']?>" placeholder="Price for twelve Month" type="text">
+
+                                </div>
+
 
 								
 								 <div class="clearfix"></div>
@@ -168,8 +198,8 @@
         branch_id:"required",
         two_session_3months:"required",
         two_session_6months:"required",
-        three_session_3months: "required",
-        three_session_6months: "required",
+       // three_session_3months: "required",
+        //three_session_6months: "required",
         //five_session: "required",
         //six_session: "required",
 
@@ -201,9 +231,10 @@
 		   			if(resp.success==1)
 		   			{
 		   				$("input[name=two_session_3months]").val(resp.two_session_three_months);
-		   				$("input[name=three_session_3months]").val(resp.three_session_three_months);
+		   				$("input[name=two_session_2months]").val(resp.two_session_two_months);
 		   				$("input[name=two_session_6months]").val(resp.two_session_six_months);
-		   				$("input[name=three_session_6months]").val(resp.three_session_six_months);
+		   				//$("input[name=three_session_6months]").val(resp.three_session_six_months);
+						$("input[name=two_session_12months]").val(resp.two_session_one_year);
 		   				//$("input[name=five_session]").val(resp.five_session);
 		   				//$("input[name=six_session]").val(resp.six_session);
 		   				$("input[name=id]").val(resp.id);
@@ -240,9 +271,10 @@
 		   			if(resp.success==1)
 		   			{
 		   				$("input[name=two_session_3months]").val(resp.two_session_three_months);
-		   				$("input[name=three_session_3months]").val(resp.three_session_three_months);
+		   				$("input[name=two_session_2months]").val(resp.two_session_two_months);
 		   				$("input[name=two_session_6months]").val(resp.two_session_six_months);
-		   				$("input[name=three_session_6months]").val(resp.three_session_six_months);
+		   				//$("input[name=three_session_6months]").val(resp.three_session_six_months);
+						$("input[name=two_session_12months]").val(resp.two_session_one_year);
 		   				//$("input[name=five_session]").val(resp.five_session);
 		   				//$("input[name=six_session]").val(resp.six_session);
 		   				$("input[name=id]").val(resp.id);
